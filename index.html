@@ -8,7 +8,7 @@
   :root{ --muted:#b7c3c0 }
   *{box-sizing:border-box}
 
-  /* ===== ФОН ===== */
+  /* ===== ФОН =====  */ 
   body{
     margin:0;
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -25,7 +25,7 @@
   }
   body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:0;}
 
-   /* Мобільний фон */
+  /* Мобільний фон */
   @media (max-width: 640px){
     body{
       background-image: url('bg-mobile.png');
@@ -34,12 +34,29 @@
   }
 
   .wrap{position:relative;z-index:1;width:min(1100px,96vw);padding:clamp(12px,3vw,28px);text-align:center}
-  h1{margin:.2em 0 .3em;font-size:clamp(26px,6.4vw,48px);line-height:1.05}
-  .sub{margin:0 0 12px;color:var(--muted);font-size:clamp(14px,4vw,18px)}
+
+  /* БІЛЬШИЙ заголовок на мобілці */
+  h1{
+    margin:.2em 0 .3em;
+    font-weight:900;
+    font-size:clamp(28px,9vw,52px);   /* було 6.4vw */
+    line-height:1.05;
+    letter-spacing:.5px;
+  }
+  .sub{
+    margin:0 0 12px;
+    color:var(--muted);
+    font-size:clamp(14px,5vw,20px);   /* було 4vw */
+  }
+
   .board{margin:18px auto 0;display:grid;place-items:center;gap:18px}
 
   /* ===== Колесо ===== */
-  .wheel-wrap{position:relative;width:clamp(300px,80vw,560px);aspect-ratio:1/1;}
+  .wheel-wrap{
+    position:relative;
+    width:clamp(320px,92vw,620px);    /* було 300/80vw/560 — тепер більше */
+    aspect-ratio:1/1;
+  }
   .wheel{
     position:absolute;inset:0;display:block;width:100%;height:100%;
     object-fit:contain;user-select:none;pointer-events:none;
@@ -51,19 +68,18 @@
   .pointer{
     position:absolute;
     left:50%;
-    bottom:64%;                      /* трохи нижче краю, щоб не “вилазила” */
+    bottom:64%;
     transform:translateX(-50%) rotate(180deg);
-    width:0; height:0;
+    width:0;height:0;
     border-left:14px solid transparent;
     border-right:14px solid transparent;
     border-top:24px solid #ff3d3d;
     filter:drop-shadow(0 -3px 0 #8b1212) drop-shadow(0 -8px 16px rgba(0,0,0,.45));
     z-index:5;
   }
-
   @media (max-width: 640px){
     .pointer{
-      bottom:64%;                      /* на телефоні трохи нижче, бо колесо менше */
+      bottom:60%;                      /* ще трохи нижче на телефоні */
       border-left:12px solid transparent;
       border-right:12px solid transparent;
       border-top:20px solid #ff3d3d;
@@ -102,16 +118,28 @@
     transform:translateY(12px) scale(.9) rotate(-6deg);
     transition:opacity .45s ease, transform .45s ease;
     user-select:none;
-    /* Золоте світіння */
-    filter: drop-shadow(0 0 5px rgba(255,215,0,0.8))
-            drop-shadow(0 0 20px rgba(255,215,0,0.6))
-            drop-shadow(0 0 40px rgba(255,200,0,0.4));
+    /* м’якше золоте світіння */
+    filter: drop-shadow(0 0 3px rgba(255,215,0,.55))
+            drop-shadow(0 0 12px rgba(255,215,0,.35))
+            drop-shadow(0 0 24px rgba(255,200,0,.25));
   }
   .egg.show{opacity:1; transform:translateY(0) scale(1) rotate(-17deg);}
   .egg.red   {right:22%; z-index:1;}
   .egg.orange{right:10%; z-index:2; transform:translateY(12px) scale(.9) rotate(-3deg);}
   .egg.orange.show{transform:translateY(0) scale(1) rotate(15deg);}
 
+  /* — менші яйця на телефоні — */
+  @media (max-width:640px){
+    .eggs{
+      right:56%;
+      top:-2%;
+      width:68%;            /* було 82% */
+      max-width:200px;      /* було 260px */
+    }
+    .egg{ width:48%; }      /* було 56% */
+    .egg.red{ right:24%; }
+    .egg.orange{ right:8%; }
+  }
 
   /* ===== Модалка ===== */
   .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:20;}
@@ -243,19 +271,13 @@
     if (clicks === 1){
       hint.textContent = T.tryAgainHint;
       spinTo(INDEX_TRY, () => {
-        // показуємо червоне яйце
         eggRed.classList.add('show');
       });
     } else if (clicks === 2){
       spinTo(INDEX_WIN, () => {
-        // додаємо помаранчеве яйце
         eggOrange.classList.add('show');
         hint.textContent = T.winHint;
-
-        // показуємо модалку через 2 секунди
-        setTimeout(() => {
-          openModal();
-        }, 2000);
+        setTimeout(() => { openModal(); }, 2000);   // 2 сек затримка
       });
     }
   });
@@ -264,12 +286,12 @@
   backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
   claimBtn.addEventListener('click', () => { closeModal(); /* тут можна зробити редирект */ });
 
-  // Ініціалізація мови
   (async () => { T = applyI18n(await detectLang()); })();
 
-  // preload
   ['wheel.png','egg-red.png','egg-orange.png'].forEach(s=>{const i=new Image();i.src=s;});
 })();
 </script>
 </body>
+</html>
+
 </html>
