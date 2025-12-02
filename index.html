@@ -4,12 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Spin & Win</title>
+
 <style>
   :root{ --muted:#b7c3c0 }
   *{box-sizing:border-box}
 
-
-  /* ===== ФОН =====  */ 
   body{
     margin:0;
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -26,36 +25,33 @@
   }
   body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:0;}
 
-  /* Мобільний фон */
   @media (max-width: 640px){
     body{
       background-image: url('bg-mobile.png');
-      background-attachment: scroll; /* щоб не смикалось на iOS */
+      background-attachment: scroll;
     }
   }
 
   .wrap{position:relative;z-index:1;width:min(1100px,96vw);padding:clamp(12px,3vw,28px);text-align:center}
 
-  /* БІЛЬШИЙ заголовок на мобілці */
   h1{
     margin:.2em 0 .3em;
     font-weight:900;
-    font-size:clamp(28px,9vw,52px);   /* було 6.4vw */
+    font-size:clamp(28px,9vw,52px);
     line-height:1.05;
     letter-spacing:.5px;
   }
   .sub{
     margin:0 0 12px;
     color:var(--muted);
-    font-size:clamp(14px,5vw,20px);   /* було 4vw */
+    font-size:clamp(14px,5vw,20px);
   }
 
   .board{margin:18px auto 0;display:grid;place-items:center;gap:18px}
 
-  /* ===== Колесо ===== */
   .wheel-wrap{
     position:relative;
-    width:clamp(320px,92vw,620px);    /* було 300/80vw/560 — тепер більше */
+    width:clamp(320px,92vw,620px);
     aspect-ratio:1/1;
   }
   .wheel{
@@ -65,11 +61,10 @@
     transition:transform 3.2s cubic-bezier(.17,.89,.15,1);will-change:transform;z-index:1;
   }
 
-  /* Стрілка (вниз) */
   .pointer{
     position:absolute;
     left:50%;
-    bottom:64%;
+    bottom:64.5%;
     transform:translateX(-50%) rotate(180deg);
     width:0;height:0;
     border-left:14px solid transparent;
@@ -80,17 +75,16 @@
   }
   @media (max-width: 640px){
     .pointer{
-      bottom:64%;                      /* ще трохи нижче на телефоні */
+      bottom:64.5%;
       border-left:12px solid transparent;
       border-right:12px solid transparent;
       border-top:20px solid #ff3d3d;
     }
   }
 
-  /* Центральна кнопка */
   .hub{position:absolute;inset:0;display:grid;place-items:center;z-index:4;pointer-events:none}
   .btn{
-    pointer-events:auto;display:grid;place-items:center;width:28%;aspect-ratio:1/1;border-radius:50%;
+    pointer-events:auto;display:grid;place-items:center;width:29%;aspect-ratio:1/1;border-radius:50%;
     background:radial-gradient(circle at 35% 35%, #b49cff, #6b49ff);
     box-shadow:0 10px 0 #3a1fb7, 0 18px 40px rgba(0,0,0,.45);
     color:#fff;font-weight:900;font-size:clamp(16px,4.4vw,24px);
@@ -100,7 +94,6 @@
 
   .hint{color:var(--muted);font-size:clamp(12px,3.6vw,16px)}
 
-  /* ===== Яйця (бейджі) ===== */
   .eggs{
     position:absolute;
     right:62%;
@@ -119,7 +112,6 @@
     transform:translateY(12px) scale(.9) rotate(-6deg);
     transition:opacity .45s ease, transform .45s ease;
     user-select:none;
-    /* м’якше золоте світіння */
     filter: drop-shadow(0 0 3px rgba(255,215,0,.55))
             drop-shadow(0 0 12px rgba(255,215,0,.35))
             drop-shadow(0 0 24px rgba(255,200,0,.25));
@@ -129,63 +121,129 @@
   .egg.orange{right:10%; z-index:2; transform:translateY(12px) scale(.9) rotate(-3deg);}
   .egg.orange.show{transform:translateY(0) scale(1) rotate(15deg);}
 
-  /* — менші яйця на телефоні — */
   @media (max-width:640px){
     .eggs{
       right:60%;
-      top:-2%;
-      width:68%;            /* було 82% */
-      max-width:200px;      /* було 260px */
+      top:-8%;
+      width:68%;
+      max-width:200px;
     }
-    .egg{ width:48%; }      /* було 56% */
+    .egg{ width:48%; }
     .egg.red{ right:24%; }
     .egg.orange{ right:8%; }
   }
 
-  /* ===== Модалка ===== */
-  .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:20;}
+  /* ===== МОДАЛКА (зелений блок як на скріні) ===== */
+  .backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:20;
+  }
   .show{display:flex}
+
   .modal{
-    width:min(520px,96vw);background:linear-gradient(180deg,#0f3a2c,#0b261d);
-    border:1px solid #114536;border-radius:20px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.6);text-align:center;
+    width:min(520px,96vw);
+    background:radial-gradient(circle at top, #065f46, #022c22);
+    border-radius:24px;
+    padding:26px 26px 28px;
+    box-shadow:0 28px 80px rgba(0,0,0,.75);
+    text-align:center;
+    position:relative;
+    border:1px solid rgba(22,163,74,.8);
   }
-  .modal h2{margin:0 0 8px;font-size:clamp(22px,6vw,28px)}
-  .winline{font-weight:900;font-size:clamp(22px,7vw,36px);margin:10px 0 16px}
+
+/* верхній рядок типу "🎉 Glückwunsch!" */
+  .modal h2{
+    margin:0 0 10px;
+    font-size:clamp(20px,5vw,24px);
+    font-weight:700;
+    color:#bbf7d0;
+  }
+
+/* великий жирний текст посередині */
+  .winline{
+    font-weight:800;
+    font-size:clamp(22px,6vw,32px);
+    margin:6px 0 20px;
+    color:#f9fafb;
+    line-height:1.25;
+  }
+
+/* зелена кнопка "Забрати виграш" / "Bonus abholen" */
   .cta{
-    margin-top:8px;padding:14px 16px;border-radius:12px;border:0;cursor:pointer;
-    background:linear-gradient(180deg,#25f28e,#1dd181);color:#01351e;font-weight:900;font-size:18px;box-shadow:0 8px 0 #0b8b53,0 16px 28px rgba(0,0,0,.35);
+    margin-top:4px;
+    padding:14px 26px;
+    border-radius:999px;
+    border:0;
+    cursor:pointer;
+    background:linear-gradient(180deg,#22c55e,#16a34a);
+    color:#022c22;
+    font-weight:900;
+    font-size:18px;
+    box-shadow:
+      0 10px 0 #15803d,
+      0 18px 40px rgba(0,0,0,.55);
+    transition:transform .12s ease, box-shadow .12s ease;
   }
-  .closeX{position:absolute;right:12px;top:10px;width:36px;height:36px;border-radius:10px;background:#0f3a2c;border:1px solid #1b5b46;color:#9fe9c7;font-weight:900;cursor:pointer;}
+  .cta:active{
+    transform:translateY(2px);
+    box-shadow:
+      0 7px 0 #15803d,
+      0 12px 28px rgba(0,0,0,.5);
+  }
+
+/* Хрестик зверху справа */
+  .closeX{
+    position:absolute;
+    right:14px;
+    top:14px;
+    width:32px;
+    height:32px;
+    border-radius:999px;
+    background:rgba(15,118,110,.9);
+    border:1px solid rgba(45,212,191,.8);
+    color:#ecfeff;
+    font-weight:900;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+   backdrop-filter:blur(4px);
+  }
+
 </style>
 </head>
+
 <body>
   <div class="wrap">
-    <h1 id="t_title">SPIN THE WHEEL</h1>
-    <p class="sub" id="t_sub">У тебе є 3 спроби! Не пропусти можливість!</p>
+    <h1 id="t_title">КРУТИ КОЛЕСО</h1>
+    <p class="sub" id="t_sub">Випробуйте удачу та заберіть бонуси: 150% до депозиту + 250 фріспінів!</p>
 
     <div class="board">
       <div class="wheel-wrap">
         <div class="pointer"></div>
 
-        <!-- PNG колесо -->
         <img id="wheel" class="wheel" src="wheel.png" alt="Wheel">
 
-        <!-- Яйця/бейджі -->
         <div class="eggs" aria-hidden="true">
-          <img id="eggRed"    class="egg red"    src="egg-red.png"    alt="" draggable="false">
-          <img id="eggOrange" class="egg orange" src="egg-orange.png" alt="" draggable="false">
+          <img id="eggRed"    class="egg red"    src="egg-red.png"    alt="">
+          <img id="eggOrange" class="egg orange" src="egg-orange.png" alt="">
         </div>
 
-        <!-- Центр-кнопка -->
         <div class="hub"><button id="spinBtn" class="btn">Spin</button></div>
       </div>
 
-      <div id="hint" class="hint">LEGENDS</div>
+      <div id="hint" class="hint">Спробуй свою удачу!</div>
     </div>
   </div>
 
-  <!-- Modal -->
-  <div id="backdrop" class="backdrop" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+  <div id="backdrop" class="backdrop" role="dialog">
     <div class="modal">
       <button id="closeX" class="closeX">✕</button>
       <h2 id="t_modal_title">🎉 Вітаємо!</h2>
@@ -194,34 +252,155 @@
     </div>
   </div>
 
+
 <script>
 (() => {
-  /* ---------- I18N (скорочено) ---------- */
+
   const I18N = {
-    uk:{title:'SPIN THE WHEEL',sub:'У тебе є 3 спроби! Не пропусти можливість!',spin:'Spin',hintStart:'LEGENDS',
-        tryAgainHint:'Ще раз спробуй — майже вийшло!',winHint:'Вітаємо! Ти виграв 🎁',
-        modalTitle:'🎉 Вітаємо!',modalText:'Ви виграли 150% до депозиту та 250 фріспінів!',claim:'Забрати виграш'},
-    de:{title:'DREHE DAS RAD',sub:'Du hast 3 Versuche! Verpasse deine Chance nicht!',spin:'Drehen',hintStart:'LEGENDS',
-        tryAgainHint:'Versuch’s noch einmal — fast geschafft!',winHint:'Glückwunsch! Du hast gewonnen 🎁',
-        modalTitle:'🎉 Glückwunsch!',modalText:'Du hast 150% auf die Einzahlung und 250 Freispiele gewonnen!',claim:'Bonus abholen'},
-    en:{title:'SPIN THE WHEEL',sub:'You have 3 attempts! Don’t miss your chance!',spin:'Spin',hintStart:'LEGENDS',
-        tryAgainHint:'Try again — almost there!',winHint:'Congrats! You’ve won 🎁',
-        modalTitle:'🎉 Congratulations!',modalText:'You won 150% deposit boost and 250 free spins!',claim:'Claim reward'}
+
+    uk:{title:'КРУТИ КОЛЕСО',
+        sub:'Випробуйте удачу та заберіть бонуси: 150% до депозиту + 250 фріспінів!',
+        spin:'Обертати',hintStart:'Спробуй свою удачу!',tryAgainHint:'Спробуй ще — майже вийшло!',
+        winHint:'Вітаємо! Ви виграли!',modalTitle:'🎉 Вітаємо!',
+        modalText:'Ви виграли 150% до депозиту та 250 фріспінів!',claim:'Забрати виграш'},
+
+    en:{title:'SPIN THE WHEEL',
+        sub:'Try your luck and claim bonuses: 150% deposit boost + 250 free spins!',
+        spin:'Spin',hintStart:'Try your luck!',tryAgainHint:'Try again — almost!',
+        winHint:'Congrats! You won!',modalTitle:'🎉 Congratulations!',
+        modalText:'You won 150% deposit bonus and 250 free spins!',claim:'Claim reward'},
+
+    de:{title:'DREHE DAS RAD',
+        sub:'Versuchen Sie Ihr Glück und holen Sie sich Boni: 150% Bonus + 250 Freispiele!',
+        spin:'Drehen',hintStart:'Versuche dein Glück!',tryAgainHint:'Nochmal versuchen!',
+        winHint:'Glückwunsch!',modalTitle:'🎉 Glückwunsch!',
+        modalText:'Sie erhalten 150% Bonus und 250 Freispiele!',claim:'Gewinn abholen'},
+
+    pl:{title:'ZAKRĘĆ KOŁEM',
+        sub:'Spróbuj szczęścia i odbierz bonusy: 150% depozytu + 250 darmowych spinów!',
+        spin:'Zakręć',hintStart:'Spróbuj szczęścia!',tryAgainHint:'Spróbuj ponownie!',
+        winHint:'Gratulacje! Wygrana!',modalTitle:'🎉 Gratulacje!',
+        modalText:'Wygrałeś 150% depozytu i 250 darmowych spinów!',claim:'Odbierz wygraną'},
+
+    fr:{title:'TOURNE LA ROUE',
+        sub:'Tente ta chance et prends des bonus : 150% + 250 free spins !',
+        spin:'Tourner',hintStart:'Tente ta chance!',tryAgainHint:'Réessaie !',
+        winHint:'Félicitations!',modalTitle:'🎉 Félicitations !',
+        modalText:'Tu gagnes 150% et 250 free spins !',claim:'Récupérer le gain'},
+
+    es:{title:'GIRA LA RULETA',
+        sub:'Prueba tu suerte y reclama bonos: 150% + 250 giros gratis!',
+        spin:'Girar',hintStart:'¡Prueba tu suerte!',tryAgainHint:'¡Inténtalo otra vez!',
+        winHint:'¡Felicidades!',modalTitle:'🎉 ¡Felicidades!',
+        modalText:'¡Has ganado 150% y 250 tiradas gratis!',claim:'Cobrar premio'},
+
+    pt:{title:'GIRE A RODA',
+        sub:'Tente sua sorte e ganhe bônus: 150% + 250 rodadas grátis!',
+        spin:'Girar',hintStart:'Tente sua sorte!',tryAgainHint:'Tente novamente!',
+        winHint:'Parabéns!',modalTitle:'🎉 Parabéns!',
+        modalText:'Você ganhou 150% e 250 giros grátis!',claim:'Receber prêmio'},
+
+    it:{title:'GIRA LA RUOTA',
+        sub:'Metti alla prova la tua fortuna: 150% + 250 giri gratis!',
+        spin:'Gira',hintStart:'Prova la fortuna!',tryAgainHint:'Riprova!',
+        winHint:'Congratulazioni!',modalTitle:'🎉 Congratulazioni!',
+        modalText:'Hai vinto 150% e 250 giri gratis!',claim:'Riscatta vincita'},
+
+    tr:{title:'ÇARKI ÇEVİR',
+        sub:'Şansını dene: %150 bonus + 250 ücretsiz dönüş!',
+        spin:'Çevir',hintStart:'Şansını dene!',tryAgainHint:'Tekrar dene!',
+        winHint:'Tebrikler!',modalTitle:'🎉 Tebrikler!',
+        modalText:'%150 bonus ve 250 free spin kazandın!',claim:'Kazancı al'},
+
+    nl:{title:'DRAAI HET RAD',
+        sub:'Probeer je geluk: 150% + 250 gratis spins!',
+        spin:'Draaien',hintStart:'Probeer je geluk!',tryAgainHint:'Probeer opnieuw!',
+        winHint:'Gefeliciteerd!',modalTitle:'🎉 Gefeliciteerd!',
+        modalText:'Je wint 150% + 250 gratis spins!',claim:'Prijs innen'},
+
+    sv:{title:'SPINNA HJUET',
+        sub:'Testa lyckan: 150% + 250 free spins!',
+        spin:'Spinna',hintStart:'Testa lyckan!',tryAgainHint:'Försök igen!',
+        winHint:'Grattis!',modalTitle:'🎉 Grattis!',
+        modalText:'Du vann 150% och 250 free spins!',claim:'Hämta vinst'},
+
+    no:{title:'SPINNHJULET',
+        sub:'Prøv lykken: 150% + 250 gratisspinn!',
+        spin:'Spinn',hintStart:'Prøv lykken!',tryAgainHint:'Prøv igjen!',
+        winHint:'Gratulerer!',modalTitle:'🎉 Gratulerer!',
+        modalText:'Du vant 150% + 250 gratisspinn!',claim:'Hent gevinst'},
+
+    da:{title:'DREJ HJULET',
+        sub:'Prøv lykken: 150% + 250 free spins!',
+        spin:'Drej',hintStart:'Prøv lykken!',tryAgainHint:'Prøv igen!',
+        winHint:'Tillykke!',modalTitle:'🎉 Tillykke!',
+        modalText:'Du vandt 150% + 250 free spins!',claim:'Hent gevinst'},
+
+    ro:{title:'ÎNVÂRTE ROATA',
+        sub:'Încearcă-ți norocul: 150% + 250 rotiri gratuite!',
+        spin:'Învârte',hintStart:'Încearcă-ți norocul!',tryAgainHint:'Mai încearcă!',
+        winHint:'Felicitări!',modalTitle:'🎉 Felicitări!',
+        modalText:'Ai câștigat 150% + 250 rotiri!',claim:'Ia câștigul'},
+
+    hu:{title:'PÖRGETÉS',
+        sub:'Próbáld ki a szerencséd: 150% + 250 ingyen pörgetés!',
+        spin:'Pörgetés',hintStart:'Próbáld ki a szerencséd!',tryAgainHint:'Próbáld újra!',
+        winHint:'Gratulálunk!',modalTitle:'🎉 Gratulálunk!',
+        modalText:'150% bónusz + 250 pörgetés!',claim:'Nyeremény felvétele'},
+
+    cs:{title:'ROZTOČ KOLO',
+        sub:'Zkuste štěstí: 150% + 250 otočení zdarma!',
+        spin:'Točit',hintStart:'Zkuste štěstí!',tryAgainHint:'Zkuste to znovu!',
+        winHint:'Gratulujeme!',modalTitle:'🎉 Gratulujeme!',
+        modalText:'150% bonusu + 250 otočení!',claim:'Vybrat výhru'},
+
+    jp:{title:'ホイールを回す',
+        sub:'運試し！150％＋250スピンを獲得！',
+        spin:'スピン',hintStart:'運試し！',tryAgainHint:'もう一度試す！',
+        winHint:'おめでとうございます！',modalTitle:'🎉 おめでとう！',
+        modalText:'150％と250フリースピン獲得！',claim:'報酬を受け取る'},
+
+    zh:{title:'轉動幸運輪',
+        sub:'試試你的運氣：150% + 250 免費旋轉！',
+        spin:'旋轉',hintStart:'試試你的運氣！',tryAgainHint:'再試一次！',
+        winHint:'恭喜！',modalTitle:'🎉 恭喜！',
+        modalText:'你贏得 150% + 250 次免費旋轉！',claim:'領取獎勵'},
+
+    ar:{title:'إدارة العجلة',
+        sub:'جرّب حظك: %150 + 250 لفة مجانية!',
+        spin:'لفّ',hintStart:'جرّب حظك!',tryAgainHint:'حاول مرة أخرى!',
+        winHint:'مبروك!',modalTitle:'🎉 مبروك!',
+        modalText:'ربحت %150 و 250 لفة!',claim:'استلام الجائزة'}
   };
-  function langFromCountry(cc){cc=(cc||'').toUpperCase();if(['DE','AT','CH','LI','LU'].includes(cc))return'de';return null;}
+
+
+  function langFromCountry(cc){
+    cc=(cc||'').toUpperCase();
+    if(['DE','AT','CH','LI','LU'].includes(cc))return'de';
+    return null;
+  }
+
   async function detectLang(){
     const urlLang=new URLSearchParams(location.search).get('lang');
     if(urlLang&&I18N[urlLang])return urlLang;
     try{
-      const r=await fetch('https://ipapi.co/json/',{cache:'no-store'});if(r.ok){const d=await r.json();
-        const cc=d.country||d.country_code;const byCC=langFromCountry(cc);if(byCC)return byCC;
+      const r=await fetch('https://ipapi.co/json/',{cache:'no-store'});
+      if(r.ok){
+        const d=await r.json();
+        const cc=d.country||d.country_code;
+        const byCC=langFromCountry(cc);
+        if(byCC)return byCC;
         if((d.languages||'').toLowerCase().includes('de'))return'de';
       }
     }catch(_){}
     const nav=(navigator.language||'').toLowerCase();
-    if(nav.startsWith('de'))return'de'; if(nav.startsWith('en'))return'en';
+    for(const k of Object.keys(I18N)){
+      if(nav.startsWith(k))return k;
+    }
+    if(nav.startsWith('en'))return'en';
     return 'uk';
   }
+
   function applyI18n(code){
     const t=I18N[code]||I18N.uk;
     document.getElementById('t_title').textContent=t.title;
@@ -235,9 +414,9 @@
     return t;
   }
 
-  /* ---------- Колесо (1-й спін TRY AGAIN, 2-й — WIN 250 FS) ---------- */
-  const INDEX_TRY  = 1; // червоний TRY AGAIN
-  const INDEX_WIN  = 5; // 250 FS (твій сектор зверху на другому спіні)
+
+  const INDEX_TRY  = 1;
+  const INDEX_WIN  = 5;
   const EXTRA_SPINS = 5;
 
   const wheel   = document.getElementById('wheel');
@@ -246,15 +425,13 @@
   const backdrop= document.getElementById('backdrop');
   const closeX  = document.getElementById('closeX');
   const claimBtn= document.getElementById('claimBtn');
-
-  // Eggs
   const eggRed    = document.getElementById('eggRed');
   const eggOrange = document.getElementById('eggOrange');
 
   let spinning=false, clicks=0, rot=0, T=I18N.uk;
 
   function angleForIndex(idx){
-    const sectorCenter = idx * 45;                // кут центра сектору
+    const sectorCenter = idx * 45;
     return 360*EXTRA_SPINS + (360 - sectorCenter);
   }
   function spinTo(idx, cb){
@@ -278,21 +455,22 @@
       spinTo(INDEX_WIN, () => {
         eggOrange.classList.add('show');
         hint.textContent = T.winHint;
-        setTimeout(() => { openModal(); }, 2000);   // 2 сек затримка
+        setTimeout(() => { openModal(); }, 2000);
       });
     }
   });
 
   closeX.addEventListener('click', closeModal);
   backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
-  claimBtn.addEventListener('click', () => { closeModal(); /* тут можна зробити редирект */ });
+  claimBtn.addEventListener('click', () => {
+  window.location.href = "https://your-link-here.com"; });
+
 
   (async () => { T = applyI18n(await detectLang()); })();
 
   ['wheel.png','egg-red.png','egg-orange.png'].forEach(s=>{const i=new Image();i.src=s;});
 })();
 </script>
-</body>
-</html>
 
+</body>
 </html>
