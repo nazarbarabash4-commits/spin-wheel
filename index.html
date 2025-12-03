@@ -73,6 +73,7 @@
     filter:drop-shadow(0 -3px 0 #8b1212) drop-shadow(0 -8px 16px rgba(0,0,0,.45));
     z-index:5;
   }
+
   @media (max-width: 640px){
     .pointer{
       bottom:64.5%;
@@ -83,6 +84,7 @@
   }
 
   .hub{position:absolute;inset:0;display:grid;place-items:center;z-index:4;pointer-events:none}
+
   .btn{
     pointer-events:auto;display:grid;place-items:center;width:29%;aspect-ratio:1/1;border-radius:50%;
     background:radial-gradient(circle at 35% 35%, #b49cff, #6b49ff);
@@ -133,7 +135,7 @@
     .egg.orange{ right:8%; }
   }
 
-  /* ===== МОДАЛКА (зелений блок як на скріні) ===== */
+  /* ===== МОДАЛКА ===== */
   .backdrop{
     position:fixed;
     inset:0;
@@ -157,7 +159,6 @@
     border:1px solid rgba(22,163,74,.8);
   }
 
-/* верхній рядок типу "🎉 Glückwunsch!" */
   .modal h2{
     margin:0 0 10px;
     font-size:clamp(20px,5vw,24px);
@@ -165,7 +166,6 @@
     color:#bbf7d0;
   }
 
-/* великий жирний текст посередині */
   .winline{
     font-weight:800;
     font-size:clamp(22px,6vw,32px);
@@ -174,7 +174,6 @@
     line-height:1.25;
   }
 
-/* зелена кнопка "Забрати виграш" / "Bonus abholen" */
   .cta{
     margin-top:4px;
     padding:14px 26px;
@@ -185,37 +184,82 @@
     color:#022c22;
     font-weight:900;
     font-size:18px;
-    box-shadow:
-      0 10px 0 #15803d,
-      0 18px 40px rgba(0,0,0,.55);
+    box-shadow:0 10px 0 #15803d,
+               0 18px 40px rgba(0,0,0,.55);
     transition:transform .12s ease, box-shadow .12s ease;
   }
   .cta:active{
     transform:translateY(2px);
-    box-shadow:
-      0 7px 0 #15803d,
-      0 12px 28px rgba(0,0,0,.5);
+    box-shadow:0 7px 0 #15803d,
+               0 12px 28px rgba(0,0,0,.5);
   }
 
-/* Хрестик зверху справа */
-  .closeX{
-    position:absolute;
-    right:14px;
-    top:14px;
-    width:32px;
-    height:32px;
-    border-radius:999px;
-    background:rgba(15,118,110,.9);
-    border:1px solid rgba(45,212,191,.8);
-    color:#ecfeff;
-    font-weight:900;
-    font-size:18px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-   backdrop-filter:blur(4px);
+/* Вузькі телефони Samsung (360px) */
+@media (max-width: 380px){
+  h1{ font-size:clamp(24px,10vw,42px); }
+  .sub{ font-size:clamp(12px,5vw,18px); }
+  .wheel-wrap{ width:92vw; }
+  .pointer{ bottom:67%; }
+  .btn{ width:34%; }
+  .eggs{ top:-12%; width:70%; }
+}
+
+/* iPhone SE, iPhone 8 */
+@media (max-width: 350px){
+  .pointer{ bottom:69%; }
+  .btn{ width:36%; }
+  .eggs{ top:-14%; width:66%; }
+}
+
+/* Високі екрани (Galaxy S21, Xiaomi) */
+@media (max-height: 740px){
+  .wrap{ padding-top:6px; }
+  .wheel-wrap{ width:87vw; }
+}
+
+/* Маленькі екрани по висоті */
+@media (max-height: 680px){
+  h1{ font-size:clamp(22px,8vw,36px); }
+  .wheel-wrap{ width:82vw; }
+  .pointer{ bottom:71%; }
+  .eggs{ top:-18%; }
+}
+
+/* Дуже маленькі телефони */
+@media (max-height: 600px){
+  .wheel-wrap{ width:78vw; }
+  .pointer{ bottom:73%; }
+  .btn{ width:38%; }
+}
+
+/* === АДАПТАЦІЯ iPhone SE та вузьких екранів === */
+@media (max-width: 380px) {
+
+  .eggs{
+    width:65% !important;
+    top:-13% !important;
+    right:58% !important;
   }
+
+  .egg{
+    width:42% !important;
+  }
+
+  .pointer{
+    bottom:66.5% !important;
+    border-left:10px solid transparent !important;
+    border-right:10px solid transparent !important;
+    border-top:18px solid #ff3d3d !important;
+  }
+
+  .btn{
+    width:33% !important;
+  }
+
+  .wheel-wrap{
+    width:94vw !important;
+  }
+}
 
 </style>
 </head>
@@ -227,6 +271,7 @@
 
     <div class="board">
       <div class="wheel-wrap">
+
         <div class="pointer"></div>
 
         <img id="wheel" class="wheel" src="wheel.png" alt="Wheel">
@@ -245,19 +290,22 @@
 
   <div id="backdrop" class="backdrop" role="dialog">
     <div class="modal">
-      <button id="closeX" class="closeX">✕</button>
       <h2 id="t_modal_title">🎉 Вітаємо!</h2>
       <div id="t_modal_text" class="winline">Ви виграли 150% до депозиту та 250 фріспінів!</div>
       <button id="claimBtn" class="cta">Забрати виграш</button>
     </div>
   </div>
 
-
 <script>
 (() => {
 
-  const I18N = {
+  /* ==== FB EVENT HELPER ==== */
+  function fbEvent(name){
+      try { fbq('trackCustom', name); } catch(e){}
+      console.log("Event:", name);
+  }
 
+  const I18N = {
     uk:{title:'КРУТИ КОЛЕСО',
         sub:'Випробуйте удачу та заберіть бонуси: 150% до депозиту + 250 фріспінів!',
         spin:'Обертати',hintStart:'Спробуй свою удачу!',tryAgainHint:'Спробуй ще — майже вийшло!',
@@ -373,7 +421,6 @@
         modalText:'ربحت %150 و 250 لفة!',claim:'استلام الجائزة'}
   };
 
-
   function langFromCountry(cc){
     cc=(cc||'').toUpperCase();
     if(['DE','AT','CH','LI','LU'].includes(cc))return'de';
@@ -415,6 +462,8 @@
   }
 
 
+  /* =============== LOGIC =============== */
+
   const INDEX_TRY  = 1;
   const INDEX_WIN  = 5;
   const EXTRA_SPINS = 5;
@@ -423,52 +472,73 @@
   const spinBtn = document.getElementById('spinBtn');
   const hint    = document.getElementById('hint');
   const backdrop= document.getElementById('backdrop');
-  const closeX  = document.getElementById('closeX');
   const claimBtn= document.getElementById('claimBtn');
   const eggRed    = document.getElementById('eggRed');
   const eggOrange = document.getElementById('eggOrange');
 
   let spinning=false, clicks=0, rot=0, T=I18N.uk;
 
+
   function angleForIndex(idx){
     const sectorCenter = idx * 45;
     return 360*EXTRA_SPINS + (360 - sectorCenter);
   }
+
   function spinTo(idx, cb){
     spinning=true; rot += angleForIndex(idx);
     wheel.style.transform = `rotate(${rot}deg)`;
     wheel.addEventListener('transitionend', ()=>{ spinning=false; cb && cb(); }, {once:true});
   }
-  function openModal(){ backdrop.classList.add('show'); }
-  function closeModal(){ backdrop.classList.remove('show'); }
+
+  /* ==== OPEN MODAL + AUTOREDIRECT ==== */
+  function openModal(){
+
+    backdrop.classList.add('show');
+
+    /* AUTO REDIRECT через 20 сек */
+    setTimeout(() => {
+        fbEvent('claim_bonus');
+        window.location.href = "{offer}";
+    }, 20000);
+  }
+
 
   spinBtn.addEventListener('click', () => {
+
     if (spinning) return;
+
     clicks++;
 
     if (clicks === 1){
       hint.textContent = T.tryAgainHint;
+      fbEvent('spin_1');
       spinTo(INDEX_TRY, () => {
         eggRed.classList.add('show');
       });
+
     } else if (clicks === 2){
+      fbEvent('spin_2');
       spinTo(INDEX_WIN, () => {
         eggOrange.classList.add('show');
         hint.textContent = T.winHint;
-        setTimeout(() => { openModal(); }, 2000);
+
+        setTimeout(() => { 
+          fbEvent('win_show');
+          openModal();
+        }, 2000);
       });
     }
   });
 
-  closeX.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
-  claimBtn.addEventListener('click', () => {
-  window.location.href = "https://your-link-here.com"; });
 
+  /* ==== CLAIM BUTTON ==== */
+  claimBtn.addEventListener('click', () => {
+      fbEvent('claim_bonus');
+      window.location.href = "{offer}";
+  });
 
   (async () => { T = applyI18n(await detectLang()); })();
 
-  ['wheel.png','egg-red.png','egg-orange.png'].forEach(s=>{const i=new Image();i.src=s;});
 })();
 </script>
 
