@@ -6,8 +6,12 @@
 <title>Spin & Win</title>
 
 <style>
-  :root{ --muted:#b7c3c0 }
-  *{box-sizing:border-box}
+  :root{
+    --muted:#b7c3c0;
+    --wheel-shift:0px; /* глобальний зсув */
+  }
+
+  *{ box-sizing:border-box }
 
   body{
     margin:0;
@@ -23,16 +27,29 @@
     position:relative;
     overflow:hidden;
   }
-  body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:0;}
 
-  @media (max-width: 640px){
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    z-index:0;
+  }
+
+  @media (max-width:640px){
     body{
-      background-image: url('bg-mobile.png');
-      background-attachment: scroll;
+      background-image:url('bg-mobile.png');
+      background-attachment:scroll;
     }
   }
 
-  .wrap{position:relative;z-index:1;width:min(1100px,96vw);padding:clamp(12px,3vw,28px);text-align:center}
+  .wrap{
+    position:relative;
+    z-index:1;
+    width:min(1100px,96vw);
+    padding:clamp(12px,3vw,28px);
+    text-align:center;
+  }
 
   h1{
     margin:.2em 0 .3em;
@@ -41,24 +58,38 @@
     line-height:1.05;
     letter-spacing:.5px;
   }
+
   .sub{
     margin:0 0 12px;
     color:var(--muted);
     font-size:clamp(14px,5vw,20px);
   }
 
-  .board{margin:18px auto 0;display:grid;place-items:center;gap:18px}
+  .board{
+    margin:18px auto 0;
+    display:grid;
+    place-items:center;
+    gap:18px;
+  }
 
   .wheel-wrap{
     position:relative;
     width:clamp(320px,92vw,620px);
     aspect-ratio:1/1;
+    transform:translateX(var(--wheel-shift));
   }
+
   .wheel{
-    position:absolute;inset:0;display:block;width:100%;height:100%;
-    object-fit:contain;user-select:none;pointer-events:none;
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    pointer-events:none;
     filter:drop-shadow(0 18px 40px rgba(0,0,0,.45));
-    transition:transform 3.2s cubic-bezier(.17,.89,.15,1);will-change:transform;z-index:1;
+    transition:transform 3.2s cubic-bezier(.17,.89,.15,1);
+    will-change:transform;
+    z-index:1;
   }
 
   .pointer{
@@ -70,11 +101,12 @@
     border-left:14px solid transparent;
     border-right:14px solid transparent;
     border-top:24px solid #ff3d3d;
-    filter:drop-shadow(0 -3px 0 #8b1212) drop-shadow(0 -8px 16px rgba(0,0,0,.45));
+    filter:drop-shadow(0 -3px 0 #8b1212)
+           drop-shadow(0 -8px 16px rgba(0,0,0,.45));
     z-index:5;
   }
 
-  @media (max-width: 640px){
+  @media (max-width:640px){
     .pointer{
       bottom:64.5%;
       border-left:12px solid transparent;
@@ -83,18 +115,41 @@
     }
   }
 
-  .hub{position:absolute;inset:0;display:grid;place-items:center;z-index:4;pointer-events:none}
+  .hub{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    z-index:4;
+    pointer-events:none;
+  }
 
   .btn{
-    pointer-events:auto;display:grid;place-items:center;width:29%;aspect-ratio:1/1;border-radius:50%;
+    pointer-events:auto;
+    display:grid;
+    place-items:center;
+    width:29%;
+    aspect-ratio:1/1;
+    border-radius:50%;
     background:radial-gradient(circle at 35% 35%, #b49cff, #6b49ff);
     box-shadow:0 10px 0 #3a1fb7, 0 18px 40px rgba(0,0,0,.45);
-    color:#fff;font-weight:900;font-size:clamp(16px,4.4vw,24px);
-    border:none;cursor:pointer;text-transform:uppercase;
+    color:#fff;
+    font-weight:900;
+    font-size:clamp(16px,4.4vw,24px);
+    border:none;
+    cursor:pointer;
+    text-transform:uppercase;
   }
-  .btn:active{transform:translateY(2px);box-shadow:0 8px 0 #3a1fb7, 0 16px 34px rgba(0,0,0,.45)}
 
-  .hint{color:var(--muted);font-size:clamp(12px,3.6vw,16px)}
+  .btn:active{
+    transform:translateY(2px);
+    box-shadow:0 8px 0 #3a1fb7, 0 16px 34px rgba(0,0,0,.45);
+  }
+
+  .hint{
+    color:var(--muted);
+    font-size:clamp(12px,3.6vw,16px);
+  }
 
   .eggs{
     position:absolute;
@@ -106,24 +161,35 @@
     pointer-events:none;
     z-index:3;
   }
+
   .egg{
-    position:absolute; bottom:0; right:0;
+    position:absolute;
+    bottom:0;
+    right:0;
     width:56%;
-    transform-origin:50% 100%;
     opacity:0;
     transform:translateY(12px) scale(.9) rotate(-6deg);
-    transition:opacity .45s ease, transform .45s ease;
+    transform-origin:50% 100%;
+    transition:.45s ease;
     user-select:none;
-    filter: drop-shadow(0 0 3px rgba(255,215,0,.55))
-            drop-shadow(0 0 12px rgba(255,215,0,.35))
-            drop-shadow(0 0 24px rgba(255,200,0,.25));
+    filter:drop-shadow(0 0 3px rgba(255,215,0,.55))
+           drop-shadow(0 0 12px rgba(255,215,0,.35))
+           drop-shadow(0 0 24px rgba(255,200,0,.25));
   }
-  .egg.show{opacity:1; transform:translateY(0) scale(1) rotate(-17deg);}
-  .egg.red   {right:22%; z-index:1;}
-  .egg.orange{right:10%; z-index:2; transform:translateY(12px) scale(.9) rotate(-3deg);}
-  .egg.orange.show{transform:translateY(0) scale(1) rotate(15deg);}
 
-  @media (max-width:640px){
+  .egg.show{
+    opacity:1;
+    transform:translateY(0) scale(1) rotate(-17deg);
+  }
+
+  .egg.red{ right:22%; z-index:1; }
+  .egg.orange{ right:10%; z-index:2; }
+
+  .egg.orange.show{
+    transform:translateY(0) scale(1) rotate(15deg);
+  }
+
+  @media(max-width:640px){
     .eggs{
       right:60%;
       top:-8%;
@@ -135,7 +201,8 @@
     .egg.orange{ right:8%; }
   }
 
-  
+  /* -------- МОДАЛ ---------------- */
+
   .backdrop{
     position:fixed;
     inset:0;
@@ -146,17 +213,18 @@
     padding:20px;
     z-index:20;
   }
-  .show{display:flex}
+
+  .show{ display:flex }
 
   .modal{
     width:min(520px,96vw);
     background:radial-gradient(circle at top, #065f46, #022c22);
     border-radius:24px;
-    padding:26px 26px 28px;
+    padding:26px;
     box-shadow:0 28px 80px rgba(0,0,0,.75);
+    border:1px solid rgba(22,163,74,.8);
     text-align:center;
     position:relative;
-    border:1px solid rgba(22,163,74,.8);
   }
 
   .modal h2{
@@ -186,76 +254,123 @@
     font-size:18px;
     box-shadow:0 10px 0 #15803d,
                0 18px 40px rgba(0,0,0,.55);
-    transition:transform .12s ease, box-shadow .12s ease;
+    transition:.12s ease;
   }
+
   .cta:active{
     transform:translateY(2px);
     box-shadow:0 7px 0 #15803d,
                0 12px 28px rgba(0,0,0,.5);
   }
 
+  /* ------------------------  
+     ТОЧНЕ ВИРІВНЮВАННЯ КОЛЕСА ДЛЯ КОЖНОЇ ДІАГОНАЛІ
+     ------------------------ */
 
-@media (max-width: 380px){
-  h1{ font-size:clamp(24px,10vw,42px); }
-  .sub{ font-size:clamp(12px,5vw,18px); }
-  .wheel-wrap{ width:92vw; }
-  .pointer{ bottom:67%; }
-  .btn{ width:34%; }
-  .eggs{ top:-12%; width:70%; }
-}
-
-@media (max-width: 350px){
-  .pointer{ bottom:69%; }
-  .btn{ width:36%; }
-  .eggs{ top:-14%; width:66%; }
-}
-
-@media (max-height: 740px){
-  .wrap{ padding-top:6px; }
-  .wheel-wrap{ width:87vw; }
-}
-
-@media (max-height: 680px){
-  h1{ font-size:clamp(22px,8vw,36px); }
-  .wheel-wrap{ width:82vw; }
-  .pointer{ bottom:71%; }
-  .eggs{ top:-18%; }
-}
-
-@media (max-height: 600px){
-  .wheel-wrap{ width:78vw; }
-  .pointer{ bottom:73%; }
-  .btn{ width:38%; }
-}
-
-@media (max-width: 380px) {
-
-  .eggs{
-    width:65% !important;
-    top:-13% !important;
-    right:58% !important;
+  /* iPhone SE (360px) */
+  @media (max-width:380px){
+    :root{ --wheel-shift:-6px; }
   }
 
-  .egg{
-    width:42% !important;
+  /* Pixel 7 (412px) */
+  @media (min-width:381px) and (max-width:415px){
+    :root{ --wheel-shift:-4px; }
   }
 
-  .pointer{
-    bottom:66.5% !important;
-    border-left:10px solid transparent !important;
-    border-right:10px solid transparent !important;
-    border-top:18px solid #ff3d3d !important;
+  /* iPhone XR (414px) */
+  @media (width:414px){
+    :root{ --wheel-shift:-4px; }
   }
 
-  .btn{
-    width:33% !important;
+  /* iPhone 12 Pro (390px) */
+  @media (width:390px){
+    :root{ --wheel-shift:-4px; }
   }
 
-  .wheel-wrap{
-    width:94vw !important;
+  /* iPhone 14 Pro Max (430px) */
+  @media (width:430px){
+    :root{ --wheel-shift:-4px; }
   }
-}
 
+  /* Samsung Galaxy S8+ (360×740) */
+  @media (device-width:360px) and (device-height:740px){
+    :root{ --wheel-shift:-4px; }
+  }
+
+  
+
+  /* ------------------------------- */
+  /* GALAXY Z FOLD 5 (344px width)   */
+  /* ------------------------------- */
+  @media (max-width: 360px) and (min-height: 820px) {
+    .eggs {
+      width: 58% !important;
+      right: 55% !important;
+      top: -13% !important;
+  }
+    .egg { width: 38% !important; }
+  }
+
+  /* ------------------------------- */
+  /* SAMSUNG GALAXY S8+ (360 × 740)  */
+  /* ------------------------------- */
+  @media (width: 360px) and (height: 740px) {
+    .eggs {
+      width: 60% !important;
+      right: 56% !important;
+      top: -10% !important;
+  }
+    .egg { width: 43% !important; }
+  }
+
+/* ------------------------------- */
+/* iPhone XR / 12 / 11 (414px)     */
+/* ------------------------------- */
+  @media (width: 414px) {
+    .eggs {
+      width: 60% !important;
+      right: 58% !important;
+      top: -6% !important;
+  }
+    .egg { width: 45% !important; }
+  }
+
+/* ------------------------------- */
+/* iPhone 12 Pro / 14 Pro (390px)  */
+/* ------------------------------- */
+  @media (width: 390px) {
+    .eggs {
+      width: 62% !important;
+      right: 59% !important;
+      top: -10% !important;
+    }
+    .egg { width: 43% !important; }
+  }
+
+/* ------------------------------- */
+/* iPhone 12 Pro Max / 14 Pro Max (430px)  */
+/* ------------------------------- */
+  @media (width: 430px) {
+    .eggs {
+      width: 62% !important;
+      right: 59% !important;
+      top: -8% !important;
+    }
+    .egg { width: 46% !important; }
+  }
+
+/* ------------------------------- */
+/* iPhone SE (375px height < 670)  */
+/* ------------------------------- */
+  @media (max-width: 375px) and (max-height: 670px) {
+    .eggs {
+      width: 62% !important;
+      right: 59% !important;
+      top: -12% !important;
+    }
+    .egg { width: 40% !important; }
+  }
+ 
 </style>
 </head>
 
