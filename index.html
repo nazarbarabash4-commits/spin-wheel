@@ -135,7 +135,7 @@
     .egg.orange{ right:8%; }
   }
 
-  /* ===== МОДАЛКА ===== */
+  
   .backdrop{
     position:fixed;
     inset:0;
@@ -194,7 +194,7 @@
                0 12px 28px rgba(0,0,0,.5);
   }
 
-/* Вузькі телефони Samsung (360px) */
+
 @media (max-width: 380px){
   h1{ font-size:clamp(24px,10vw,42px); }
   .sub{ font-size:clamp(12px,5vw,18px); }
@@ -204,20 +204,17 @@
   .eggs{ top:-12%; width:70%; }
 }
 
-/* iPhone SE, iPhone 8 */
 @media (max-width: 350px){
   .pointer{ bottom:69%; }
   .btn{ width:36%; }
   .eggs{ top:-14%; width:66%; }
 }
 
-/* Високі екрани (Galaxy S21, Xiaomi) */
 @media (max-height: 740px){
   .wrap{ padding-top:6px; }
   .wheel-wrap{ width:87vw; }
 }
 
-/* Маленькі екрани по висоті */
 @media (max-height: 680px){
   h1{ font-size:clamp(22px,8vw,36px); }
   .wheel-wrap{ width:82vw; }
@@ -225,14 +222,12 @@
   .eggs{ top:-18%; }
 }
 
-/* Дуже маленькі телефони */
 @media (max-height: 600px){
   .wheel-wrap{ width:78vw; }
   .pointer{ bottom:73%; }
   .btn{ width:38%; }
 }
 
-/* === АДАПТАЦІЯ iPhone SE та вузьких екранів === */
 @media (max-width: 380px) {
 
   .eggs{
@@ -299,7 +294,6 @@
 <script>
 (() => {
 
-  /* ==== FB EVENT HELPER ==== */
   function fbEvent(name){
       try { fbq('trackCustom', name); } catch(e){}
       console.log("Event:", name);
@@ -462,8 +456,6 @@
   }
 
 
-  /* =============== LOGIC =============== */
-
   const INDEX_TRY  = 1;
   const INDEX_WIN  = 5;
   const EXTRA_SPINS = 5;
@@ -490,12 +482,10 @@
     wheel.addEventListener('transitionend', ()=>{ spinning=false; cb && cb(); }, {once:true});
   }
 
-  /* ==== OPEN MODAL + AUTOREDIRECT ==== */
   function openModal(){
 
     backdrop.classList.add('show');
 
-    /* AUTO REDIRECT через 20 сек */
     setTimeout(() => {
         fbEvent('claim_bonus');
         window.location.href = "{offer}";
@@ -531,7 +521,6 @@
   });
 
 
-  /* ==== CLAIM BUTTON ==== */
   claimBtn.addEventListener('click', () => {
       fbEvent('claim_bonus');
       window.location.href = "{offer}";
