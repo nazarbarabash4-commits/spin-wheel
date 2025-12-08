@@ -6,371 +6,277 @@
 <title>Spin & Win</title>
 
 <style>
-  :root{
-    --muted:#b7c3c0;
-    --wheel-shift:0px; /* глобальний зсув */
-  }
+:root{
+  --muted:#b7c3c0;
+}
 
-  *{ box-sizing:border-box }
+/* ------------------------------ */
+/*             BASE               */
+/* ------------------------------ */
 
+*{ box-sizing:border-box }
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:#fff;
+  background:#000 url('bg.png') center/cover no-repeat;
+  background-attachment: fixed;
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+  position:relative;
+  overflow:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:0;
+}
+
+@media (max-width:640px){
   body{
-    margin:0;
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    color:#fff;
-    background:#000 url('bg.png') center/cover no-repeat;
-    background-attachment: fixed;
-    min-height:100svh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    -webkit-tap-highlight-color:transparent;
-    position:relative;
-    overflow:hidden;
+    background-image:url('bg-mobile.png');
+    background-attachment:scroll;
   }
+}
 
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    z-index:0;
-  }
+.wrap{
+  position:relative;
+  z-index:1;
+  width:min(1100px,96vw);
+  padding:clamp(12px,3vw,28px);
+  text-align:center;
+}
 
-  @media (max-width:640px){
-    body{
-      background-image:url('bg-mobile.png');
-      background-attachment:scroll;
-    }
-  }
+h1{
+  margin:.2em 0 .3em;
+  font-weight:900;
+  font-size:clamp(28px,9vw,52px);
+  line-height:1.05;
+  letter-spacing:.5px;
+}
 
-  .wrap{
-    position:relative;
-    z-index:1;
-    width:min(1100px,96vw);
-    padding:clamp(12px,3vw,28px);
-    text-align:center;
-  }
+.sub{
+  margin:0 0 12px;
+  color:var(--muted);
+  font-size:clamp(14px,5vw,20px);
+}
 
-  h1{
-    margin:.2em 0 .3em;
-    font-weight:900;
-    font-size:clamp(28px,9vw,52px);
-    line-height:1.05;
-    letter-spacing:.5px;
-  }
+.board{
+  margin:18px auto 0;
+  display:grid;
+  place-items:center;
+  gap:18px;
+}
 
-  .sub{
-    margin:0 0 12px;
-    color:var(--muted);
-    font-size:clamp(14px,5vw,20px);
-  }
+/* ------------------------------------------ */
+/* UNIVERSAL PERFECTLY CENTERED WHEEL LAYOUT  */
+/* ------------------------------------------ */
 
-  .board{
-    margin:18px auto 0;
-    display:grid;
-    place-items:center;
-    gap:18px;
-  }
+.wheel-wrap{
+  position:relative;
+  width:90vw;
+  max-width:600px;
+  aspect-ratio:1/1;
+  margin:0 auto;
+}
 
-  .wheel-wrap{
-    position:relative;
-    width:clamp(320px,92vw,620px);
-    aspect-ratio:1/1;
-    transform:translateX(var(--wheel-shift));
-  }
+/* Wheel image */
+.wheel{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  pointer-events:none;
+  filter:drop-shadow(0 18px 40px rgba(0,0,0,.45));
+  transition:transform 3.2s cubic-bezier(.17,.89,.15,1);
+  will-change:transform;
+  z-index:1;
+}
 
-  .wheel{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    pointer-events:none;
-    filter:drop-shadow(0 18px 40px rgba(0,0,0,.45));
-    transition:transform 3.2s cubic-bezier(.17,.89,.15,1);
-    will-change:transform;
-    z-index:1;
-  }
+/* UNIVERSAL POINTER (never jumps) */
+.pointer{
+  position:absolute;
+  left:50%;
+  bottom:66%;
+  transform:translateX(-50%) rotate(180deg);
+  width:0;
+  height:0;
+  border-left:13px solid transparent;
+  border-right:13px solid transparent;
+  border-top:22px solid #ff3d3d;
+  filter:drop-shadow(0 -3px 0 #8b1212)
+         drop-shadow(0 -8px 16px rgba(0,0,0,.45));
+  z-index:5;
+}
 
+/* For super-small screens */
+@media (max-width:360px){
   .pointer{
-    position:absolute;
-    left:50%;
-    bottom:64.5%;
-    transform:translateX(-50%) rotate(180deg);
-    width:0;height:0;
-    border-left:14px solid transparent;
-    border-right:14px solid transparent;
-    border-top:24px solid #ff3d3d;
-    filter:drop-shadow(0 -3px 0 #8b1212)
-           drop-shadow(0 -8px 16px rgba(0,0,0,.45));
-    z-index:5;
+    bottom:66%;
+    border-left:11px solid transparent;
+    border-right:11px solid transparent;
+    border-top:18px solid #ff3d3d;
   }
+}
 
-  @media (max-width:640px){
-    .pointer{
-      bottom:64.5%;
-      border-left:12px solid transparent;
-      border-right:12px solid transparent;
-      border-top:20px solid #ff3d3d;
-    }
-  }
+/* HUB + BUTTON */
+.hub{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  z-index:4;
+  pointer-events:none;
+}
 
-  .hub{
-    position:absolute;
-    inset:0;
-    display:grid;
-    place-items:center;
-    z-index:4;
-    pointer-events:none;
-  }
+.btn{
+  pointer-events:auto;
+  display:grid;
+  place-items:center;
+  width:32%;
+  aspect-ratio:1/1;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #b49cff, #6b49ff);
+  box-shadow:0 10px 0 #3a1fb7, 0 18px 40px rgba(0,0,0,.45);
+  color:#fff;
+  font-weight:900;
+  font-size:clamp(16px,4.4vw,24px);
+  border:none;
+  cursor:pointer;
+  text-transform:uppercase;
+}
 
-  .btn{
-    pointer-events:auto;
-    display:grid;
-    place-items:center;
-    width:29%;
-    aspect-ratio:1/1;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, #b49cff, #6b49ff);
-    box-shadow:0 10px 0 #3a1fb7, 0 18px 40px rgba(0,0,0,.45);
-    color:#fff;
-    font-weight:900;
-    font-size:clamp(16px,4.4vw,24px);
-    border:none;
-    cursor:pointer;
-    text-transform:uppercase;
-  }
+.btn:active{
+  transform:translateY(2px);
+  box-shadow:0 8px 0 #3a1fb7, 0 16px 34px rgba(0,0,0,.45);
+}
 
-  .btn:active{
-    transform:translateY(2px);
-    box-shadow:0 8px 0 #3a1fb7, 0 16px 34px rgba(0,0,0,.45);
-  }
+.hint{
+  color:var(--muted);
+  font-size:clamp(12px,3.6vw,16px);
+}
 
-  .hint{
-    color:var(--muted);
-    font-size:clamp(12px,3.6vw,16px);
-  }
+/* ------------------------------------------ */
+/* UNIVERSAL EGG POSITIONING (NO MORE BREAKS) */
+/* ------------------------------------------ */
 
+.eggs{
+  position:absolute;
+  width:55%;      /* strictly proportional */
+  left:-12%;      /* slight shift left globally */
+  top:35%;
+  pointer-events:none;
+  z-index:3;
+}
+
+.egg{
+  width:46%;
+  position:absolute;
+  bottom:0;
+  right:0;
+  transform-origin:50% 100%;
+  opacity:0;
+  transform:translateY(10px) scale(.9) rotate(-6deg);
+  transition:opacity .45s ease, transform .45s ease;
+  filter:drop-shadow(0 0 3px rgba(255,215,0,.55))
+         drop-shadow(0 0 12px rgba(255,215,0,.35))
+         drop-shadow(0 0 24px rgba(255,200,0,.25));
+}
+
+.egg.show{
+  opacity:1;
+  transform:translateY(0) scale(1) rotate(-17deg);
+}
+
+.egg.red{ right:22%; z-index:1; }
+.egg.orange{ right:10%; z-index:2; }
+
+.egg.orange.show{
+  transform:translateY(0) scale(1) rotate(15deg);
+}
+
+/* Small screens */
+@media (max-width:360px){
   .eggs{
-    position:absolute;
-    right:62%;
-    top:-2%;
-    width:82%;
-    max-width:260px;
-    aspect-ratio:4/3;
-    pointer-events:none;
-    z-index:3;
+    width: 60%;
+    left:-15%;
+    top: 35%;
   }
-
   .egg{
-    position:absolute;
-    bottom:0;
-    right:0;
-    width:56%;
-    opacity:0;
-    transform:translateY(12px) scale(.9) rotate(-6deg);
-    transform-origin:50% 100%;
-    transition:.45s ease;
-    user-select:none;
-    filter:drop-shadow(0 0 3px rgba(255,215,0,.55))
-           drop-shadow(0 0 12px rgba(255,215,0,.35))
-           drop-shadow(0 0 24px rgba(255,200,0,.25));
+    width:42%;
   }
+}
 
-  .egg.show{
-    opacity:1;
-    transform:translateY(0) scale(1) rotate(-17deg);
-  }
+/* ------------------------------ */
+/*            MODAL              */
+/* ------------------------------ */
 
-  .egg.red{ right:22%; z-index:1; }
-  .egg.orange{ right:10%; z-index:2; }
+.backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:20;
+}
+.show{display:flex}
 
-  .egg.orange.show{
-    transform:translateY(0) scale(1) rotate(15deg);
-  }
+.modal{
+  width:min(520px,96vw);
+  background:radial-gradient(circle at top, #065f46, #022c22);
+  border-radius:26px;
+  padding:26px 22px;
+  box-shadow:0 28px 80px rgba(0,0,0,.75);
+  text-align:center;
+  position:relative;
+  border:1px solid rgba(22,163,74,.8);
+}
 
-  @media(max-width:640px){
-    .eggs{
-      right:60%;
-      top:-8%;
-      width:68%;
-      max-width:200px;
-    }
-    .egg{ width:48%; }
-    .egg.red{ right:24%; }
-    .egg.orange{ right:8%; }
-  }
+.modal h2{
+  margin:0 0 10px;
+  font-size:clamp(22px,6vw,30px);
+  color:white;
+}
 
-  /* -------- МОДАЛ ---------------- */
+.winline{
+  font-weight:900;
+  font-size:clamp(20px,6.5vw,34px);
+  margin:10px 0 20px;
+  color:#ffffff;
+  line-height:1.25;
+  text-shadow:0 4px 12px rgba(0,0,0,.35);
+}
 
-  .backdrop{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.65);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    z-index:20;
-  }
+.cta{
+  margin-top:6px;
+  padding:14px 22px;
+  border-radius:14px;
+  border:0;
+  cursor:pointer;
+  background:linear-gradient(180deg,#22c55e,#16a34a);
+  color:#ffffff;
+  font-weight:900;
+  font-size:18px;
+  box-shadow:0 10px 0 #15803d,
+             0 18px 40px rgba(0,0,0,.55);
+  transition:transform .15s ease;
+}
 
-  .show{ display:flex }
-
-  .modal{
-    width:min(520px,96vw);
-    background:radial-gradient(circle at top, #065f46, #022c22);
-    border-radius:24px;
-    padding:26px;
-    box-shadow:0 28px 80px rgba(0,0,0,.75);
-    border:1px solid rgba(22,163,74,.8);
-    text-align:center;
-    position:relative;
-  }
-
-  .modal h2{
-    margin:0 0 10px;
-    font-size:clamp(20px,5vw,24px);
-    font-weight:700;
-    color:#bbf7d0;
-  }
-
-  .winline{
-    font-weight:800;
-    font-size:clamp(22px,6vw,32px);
-    margin:6px 0 20px;
-    color:#f9fafb;
-    line-height:1.25;
-  }
-
-  .cta{
-    margin-top:4px;
-    padding:14px 26px;
-    border-radius:999px;
-    border:0;
-    cursor:pointer;
-    background:linear-gradient(180deg,#22c55e,#16a34a);
-    color:#022c22;
-    font-weight:900;
-    font-size:18px;
-    box-shadow:0 10px 0 #15803d,
-               0 18px 40px rgba(0,0,0,.55);
-    transition:.12s ease;
-  }
-
-  .cta:active{
-    transform:translateY(2px);
-    box-shadow:0 7px 0 #15803d,
-               0 12px 28px rgba(0,0,0,.5);
-  }
-
-  /* ------------------------  
-     ТОЧНЕ ВИРІВНЮВАННЯ КОЛЕСА ДЛЯ КОЖНОЇ ДІАГОНАЛІ
-     ------------------------ */
-
-  /* iPhone SE (360px) */
-  @media (max-width:380px){
-    :root{ --wheel-shift:-6px; }
-  }
-
-  /* Pixel 7 (412px) */
-  @media (min-width:381px) and (max-width:415px){
-    :root{ --wheel-shift:-4px; }
-  }
-
-  /* iPhone XR (414px) */
-  @media (width:414px){
-    :root{ --wheel-shift:-4px; }
-  }
-
-  /* iPhone 12 Pro (390px) */
-  @media (width:390px){
-    :root{ --wheel-shift:-4px; }
-  }
-
-  /* iPhone 14 Pro Max (430px) */
-  @media (width:430px){
-    :root{ --wheel-shift:-4px; }
-  }
-
-  /* Samsung Galaxy S8+ (360×740) */
-  @media (device-width:360px) and (device-height:740px){
-    :root{ --wheel-shift:-4px; }
-  }
-
-  
-
-  /* ------------------------------- */
-  /* GALAXY Z FOLD 5 (344px width)   */
-  /* ------------------------------- */
-  @media (max-width: 360px) and (min-height: 820px) {
-    .eggs {
-      width: 58% !important;
-      right: 55% !important;
-      top: -13% !important;
-  }
-    .egg { width: 38% !important; }
-  }
-
-  /* ------------------------------- */
-  /* SAMSUNG GALAXY S8+ (360 × 740)  */
-  /* ------------------------------- */
-  @media (width: 360px) and (height: 740px) {
-    .eggs {
-      width: 60% !important;
-      right: 56% !important;
-      top: -10% !important;
-  }
-    .egg { width: 43% !important; }
-  }
-
-/* ------------------------------- */
-/* iPhone XR / 12 / 11 (414px)     */
-/* ------------------------------- */
-  @media (width: 414px) {
-    .eggs {
-      width: 60% !important;
-      right: 58% !important;
-      top: -6% !important;
-  }
-    .egg { width: 45% !important; }
-  }
-
-/* ------------------------------- */
-/* iPhone 12 Pro / 14 Pro (390px)  */
-/* ------------------------------- */
-  @media (width: 390px) {
-    .eggs {
-      width: 62% !important;
-      right: 59% !important;
-      top: -10% !important;
-    }
-    .egg { width: 43% !important; }
-  }
-
-/* ------------------------------- */
-/* iPhone 12 Pro Max / 14 Pro Max (430px)  */
-/* ------------------------------- */
-  @media (width: 430px) {
-    .eggs {
-      width: 62% !important;
-      right: 59% !important;
-      top: -8% !important;
-    }
-    .egg { width: 46% !important; }
-  }
-
-/* ------------------------------- */
-/* iPhone SE (375px height < 670)  */
-/* ------------------------------- */
-  @media (max-width: 375px) and (max-height: 670px) {
-    .eggs {
-      width: 62% !important;
-      right: 59% !important;
-      top: -12% !important;
-    }
-    .egg { width: 40% !important; }
-  }
- 
+.cta:active{
+  transform:translateY(2px);
+  box-shadow:0 7px 0 #15803d,
+             0 12px 28px rgba(0,0,0,.5);
+}
 </style>
 </head>
 
@@ -417,7 +323,7 @@
   const I18N = {
     uk:{title:'КРУТИ КОЛЕСО',
         sub:'Випробуйте удачу та заберіть бонуси: 150% до депозиту + 250 фріспінів!',
-        spin:'Обертати',hintStart:'Спробуй свою удачу!',tryAgainHint:'Спробуй ще — майже вийшло!',
+        spin:'Крути',hintStart:'Спробуй свою удачу!',tryAgainHint:'Спробуй ще — майже вийшло!',
         winHint:'Вітаємо! Ви виграли!',modalTitle:'🎉 Вітаємо!',
         modalText:'Ви виграли 150% до депозиту та 250 фріспінів!',claim:'Забрати виграш'},
 
@@ -441,7 +347,7 @@
 
     fr:{title:'TOURNE LA ROUE',
         sub:'Tente ta chance et prends des bonus : 150% + 250 free spins !',
-        spin:'Tourner',hintStart:'Tente ta chance!',tryAgainHint:'Réessaie !',
+        spin:'Jouer',hintStart:'Tente ta chance!',tryAgainHint:'Réessaie !',
         winHint:'Félicitations!',modalTitle:'🎉 Félicitations !',
         modalText:'Tu gagnes 150% et 250 free spins !',claim:'Récupérer le gain'},
 
@@ -471,7 +377,7 @@
 
     nl:{title:'DRAAI HET RAD',
         sub:'Probeer je geluk: 150% + 250 gratis spins!',
-        spin:'Draaien',hintStart:'Probeer je geluk!',tryAgainHint:'Probeer opnieuw!',
+        spin:'Spelen',hintStart:'Probeer je geluk!',tryAgainHint:'Probeer opnieuw!',
         winHint:'Gefeliciteerd!',modalTitle:'🎉 Gefeliciteerd!',
         modalText:'Je wint 150% + 250 gratis spins!',claim:'Prijs innen'},
 
@@ -495,13 +401,13 @@
 
     ro:{title:'ÎNVÂRTE ROATA',
         sub:'Încearcă-ți norocul: 150% + 250 rotiri gratuite!',
-        spin:'Învârte',hintStart:'Încearcă-ți norocul!',tryAgainHint:'Mai încearcă!',
+        spin:'Joacă',hintStart:'Încearcă-ți norocul!',tryAgainHint:'Mai încearcă!',
         winHint:'Felicitări!',modalTitle:'🎉 Felicitări!',
         modalText:'Ai câștigat 150% + 250 rotiri!',claim:'Ia câștigul'},
 
     hu:{title:'PÖRGETÉS',
         sub:'Próbáld ki a szerencséd: 150% + 250 ingyen pörgetés!',
-        spin:'Pörgetés',hintStart:'Próbáld ki a szerencséd!',tryAgainHint:'Próbáld újra!',
+        spin:'Játék',hintStart:'Próbáld ki a szerencséd!',tryAgainHint:'Próbáld újra!',
         winHint:'Gratulálunk!',modalTitle:'🎉 Gratulálunk!',
         modalText:'150% bónusz + 250 pörgetés!',claim:'Nyeremény felvétele'},
 
@@ -530,30 +436,19 @@
         modalText:'ربحت %150 و 250 لفة!',claim:'استلام الجائزة'}
   };
 
-  function langFromCountry(cc){
-    cc=(cc||'').toUpperCase();
-    if(['DE','AT','CH','LI','LU'].includes(cc))return'de';
-    return null;
-  }
 
   async function detectLang(){
-    const urlLang=new URLSearchParams(location.search).get('lang');
-    if(urlLang&&I18N[urlLang])return urlLang;
-    try{
-      const r=await fetch('https://ipapi.co/json/',{cache:'no-store'});
-      if(r.ok){
-        const d=await r.json();
-        const cc=d.country||d.country_code;
-        const byCC=langFromCountry(cc);
-        if(byCC)return byCC;
-        if((d.languages||'').toLowerCase().includes('de'))return'de';
-      }
-    }catch(_){}
-    const nav=(navigator.language||'').toLowerCase();
-    for(const k of Object.keys(I18N)){
-      if(nav.startsWith(k))return k;
+
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    if (urlLang && I18N[urlLang]) return urlLang;
+
+    const nav = (navigator.language || '').toLowerCase();
+    for (const k of Object.keys(I18N)) {
+      if (nav.startsWith(k)) return k;
     }
-    if(nav.startsWith('en'))return'en';
+
+    if (nav.startsWith('en')) return 'en';
+
     return 'uk';
   }
 
@@ -604,7 +499,7 @@
     setTimeout(() => {
         fbEvent('claim_bonus');
         window.location.href = "{offer}";
-    }, 20000);
+    }, 10000);
   }
 
 
@@ -630,7 +525,7 @@
         setTimeout(() => { 
           fbEvent('win_show');
           openModal();
-        }, 2000);
+        }, 1500);
       });
     }
   });
@@ -645,6 +540,5 @@
 
 })();
 </script>
-
 </body>
 </html>
