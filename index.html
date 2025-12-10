@@ -297,7 +297,7 @@ h1{
           <img id="eggOrange" class="egg orange" src="egg-orange.png" alt="">
         </div>
 
-        <div class="hub"><button id="spinBtn" class="btn">Spin</button></div>
+        <div class="hub"><button id="spinBtn" class="btn">Крути</button></div>
       </div>
 
       <div id="hint" class="hint">Спробуй свою удачу!</div>
@@ -321,6 +321,7 @@ h1{
   }
 
   const I18N = {
+
     uk:{title:'КРУТИ КОЛЕСО',
         sub:'Випробуйте удачу та заберіть бонуси: 150% до депозиту + 250 фріспінів!',
         spin:'Крути',hintStart:'Спробуй свою удачу!',tryAgainHint:'Спробуй ще — майже вийшло!',
@@ -337,7 +338,6 @@ h1{
         modalTitle: '🎉 Поздравляем!',
         modalText: 'Вы выиграли 150% к депозиту и 250 фриспинов!',
         claim: 'Забрать выигрыш' },
-
 
     en:{title:'SPIN THE WHEEL',
         sub:'Try your luck and claim bonuses: 150% deposit boost + 250 free spins!',
@@ -441,11 +441,850 @@ h1{
         winHint:'恭喜！',modalTitle:'🎉 恭喜！',
         modalText:'你贏得 150% + 250 次免費旋轉！',claim:'領取獎勵'},
 
+    bg: {
+        title: "ЗАВЪРТИ КОЛЕЛОТО",
+        sub: "Опитайте късмета си и вземете бонуси: 150% към депозита + 250 безплатни завъртания!",
+        hintStart: "Пробвай късмета си!",
+        tryAgainHint: "Опитай пак — почти успя!",
+        winHint: "Поздравления! Печелите!",
+        modalTitle: "🎉 Поздравления!",
+        modalText: "Печелите 150% към депозита и 250 безплатни завъртания!",
+        claim: "Вземи наградата"
+    },
+
+    sk: {
+        title: "ROZTOČ KOLESO",
+        sub: "Vyskúšajte šťastie a získajte bonusy: 150 % k vkladu + 250 voľných točení!",
+        spin: "Točiť",
+        hintStart: "Skús svoje šťastie!",
+        tryAgainHint: "Skús znova — skoro to vyšlo!",
+        winHint: "Gratulujeme! Vyhrali ste!",
+        modalTitle: "🎉 Gratulujeme!",
+        modalText: "Vyhrali ste 150 % k vkladu a 250 voľných točení!",
+        claim: "Prevziať výhru"
+    },
+
+    el: {
+        title: "ΓΥΡΙΣΕ ΤΟΝ ΤΡΟΧΟ",
+        sub: "Δοκιμάστε την τύχη σας και πάρτε μπόνους: 150% κατάθεση + 250 δωρεάν περιστροφές!",
+        spin: "Γύρισμα",
+        hintStart: "Δοκίμασε την τύχη σου!",
+        tryAgainHint: "Ξαναπροσπάθησε — λίγο έμεινε!",
+        winHint: "Συγχαρητήρια! Κερδίσατε!",
+        modalTitle: "🎉 Συγχαρητήρια!",
+        modalText: "Κερδίσατε 150% στην κατάθεση και 250 δωρεάν περιστροφές!",
+        claim: "Λάβετε το έπαθλο"
+    },
+
+    ca: {
+        title: "GIRA LA RODA",
+        sub: "Prova sort i aconsegueix bons: 150% al dipòsit + 250 girs gratis!",
+        spin: "Girar",
+        hintStart: "Prova la teva sort!",
+        tryAgainHint: "Torna-ho a provar — gairebé ho tens!",
+        winHint: "Felicitats! Has guanyat!",
+        modalTitle: "🎉 Felicitats!",
+        modalText: "Has guanyat un 150% al dipòsit i 250 girs gratis!",
+        claim: "Reclama el premi"
+    },
+
+    sq: {
+        title: "RROTULLO RROTËN",
+        sub: "Provoni fatin dhe merrni bonuset: 150% në depozitë + 250 rrotullime falas!",
+        spin: "Rrotullo",
+        hintStart: "Provo fatin tënd!",
+        tryAgainHint: "Provo përsëri — ishte afër!",
+        winHint: "Urime! Fitove!",
+        modalTitle: "🎉 Urime!",
+        modalText: "Fitove 150% në depozitë dhe 250 rrotullime falas!",
+        claim: "Merr shpërblimin"
+    },
+
+    et: {
+        title: "PÖÖRA RATAST",
+        sub: "Proovi oma õnne ja saa boonuseid: 150% sissemaksele + 250 tasuta keerutust!",
+        spin: "Pööra",
+        hintStart: "Proovi õnne!",
+        tryAgainHint: "Proovi uuesti — peaaegu õnnestus!",
+        winHint: "Õnnitleme! Sa võitsid!",
+        modalTitle: "🎉 Õnnitleme!",
+        modalText: "Sa võitsid 150% sissemakse boonusena ja 250 tasuta keerutust!",
+        claim: "Võta auhind"
+    },
+
+    lv: {
+        title: "GRIEŽ RITENI",
+        sub: "Izmēģini veiksmi un saņem bonusus: 150% iemaksai + 250 bezmaksas griezieni!",
+        spin: "Griezt",
+        hintStart: "Izmēģini veiksmi!",
+        tryAgainHint: "Mēģini vēlreiz — gandrīz izdevās!",
+        winHint: "Apsveicam! Tu uzvarēji!",
+        modalTitle: "🎉 Apsveicam!",
+        modalText: "Tu uzvarēji 150% iemaksai un 250 bezmaksas griezienus!",
+        claim: "Saņemt laimestu"
+    },
+
+    sr: {
+        title: "ЗАВРТИ ТОЧАК",
+        sub: "Испробај срећу и освој бонусе: 150% на депозит + 250 бесплатних вртења!",
+        spin: "Заврти",
+        hintStart: "Испробај срећу!",
+        tryAgainHint: "Покушај поново — замало!",
+        winHint: "Честитамо! Победили сте!",
+        modalTitle: "🎉 Честитамо!",
+        modalText: "Освојили сте 150% на депозит и 250 бесплатних вртења!",
+        claim: "Преузми награду"
+    },
+
+    sl: {
+        title: "ZAVRTI KOLO",
+        sub: "Preizkusite srečo in prejmite bonuse: 150% na polog + 250 brezplačnih vrtljajev!",
+        spin: "Zavrti",
+        hintStart: "Preizkusi srečo!",
+        tryAgainHint: "Poskusi znova — skoraj ti je uspelo!",
+        winHint: "Čestitke! Zmagal si!",
+        modalTitle: "🎉 Čestitke!",
+        modalText: "Osvojil si 150% na polog in 250 brezplačnih vrtljajev!",
+        claim: "Prevzemi nagrado"
+    },
+
+    ka: {
+        title: "ატრიალე წრე",
+        sub: "სცადეთ ბედი და მიიღეთ ბონუსები: 150% დეპოზიტზე + 250 ფრისპინი!",
+        spin: "ატრიალე",
+        hintStart: "სცადე ბედი!",
+        tryAgainHint: "კვლავ სცადე — თითქმის გამოგივიდა!",
+        winHint: "გილოცავთ! თქვენ გაიმარჯვეთ!",
+        modalTitle: "🎉 გილოცავთ!",
+        modalText: "გაიმარჯვეთ 150% დეპოზიტზე და 250 ფრისპინი!",
+        claim: "მიიღე მოგება"
+    },
+
+    bs: {
+        title: "ZAVRTI TOČAK",
+        sub: "Isprobajte sreću i osvojite bonuse: 150% na depozit + 250 besplatnih okretaja!",
+        spin: "Zavrti",
+        hintStart: "Probaj sreću!",
+        tryAgainHint: "Pokušaj opet — skoro je bilo!",
+        winHint: "Čestitamo! Pobijedili ste!",
+        modalTitle: "🎉 Čestitamo!",
+        modalText: "Osvojili ste 150% na depozit i 250 besplatnih okretaja!",
+        claim: "Preuzmi nagradu"
+    },
+
+    lt: {
+        title: "SUK RATĄ",
+        sub: "Išbandyk laimę ir gauk bonusus: 150% įnašui + 250 nemokamų sukimų!",
+        spin: "Sukti",
+        hintStart: "Išbandyk laimę!",
+        tryAgainHint: "Bandyk dar kartą — beveik pavyko!",
+        winHint: "Sveikiname! Jūs laimėjote!",
+        modalTitle: "🎉 Sveikiname!",
+        modalText: "Jūs laimėjote 150% įnašui ir 250 nemokamų sukimų!",
+        claim: "Atsiimti laimėjimą"
+    },
+
+    az: {
+        title: "ÇARXI FİRLAT",
+        sub: "Şansınızı sınayın və bonuslar qazanın: depozitin 150%-i + 250 pulsuz fırlatma!",
+        spin: "Fırlat",
+        hintStart: "Şansını sınayın!",
+        tryAgainHint: "Yenidən cəhd edin — az qalmışdı!",
+        winHint: "Təbriklər! Qazandınız!",
+        modalTitle: "🎉 Təbriklər!",
+        modalText: "Siz 150% depozit bonusu və 250 pulsuz fırlatma qazandınız!",
+        claim: "Uduşу götür"
+    },
+
+    fi: {
+        title: "PYÖRÄYTÄ PYÖRÄÄ",
+        sub: "Kokeile onneasi ja lunasta bonukset: 150% talletukselle + 250 ilmaiskierrosta!",
+        spin: "Pyöräytä",
+        hintStart: "Kokeile onneasi!",
+        tryAgainHint: "Yritä uudelleen — melkein onnistui!",
+        winHint: "Onnittelut! Voitit!",
+        modalTitle: "🎉 Onnittelut!",
+        modalText: "Voitit 150% talletukselle ja 250 ilmaiskierrosta!",
+        claim: "Lunasta palkinto"
+    },
+
+    mo: {
+        itle: "ÎNVÂRTE ROATA",
+        sub: "Încearcă-ți norocul și ia bonusuri: 150% la depozit + 250 rotiri gratuite!",
+        spin: "Învârte",
+        hintStart: "Încearcă-ți norocul!",
+        tryAgainHint: "Încearcă din nou — era aproape!",
+        winHint: "Felicitări! Ai câștigat!",
+        modalTitle: "🎉 Felicitări!",
+        modalText: "Ai câștigat 150% la depozit și 250 rotiri gratuite!",
+        claim: "Ia premiul"
+    },
+
+    mk: {
+        title: "ЗАВРТИ ГО ТРКАЛОТО",
+        sub: "Испробај ја својата среќа и земи бонуси: 150% на депозит + 250 бесплатни вртења!",
+        spin: "Заврти",
+        hintStart: "Испробај среќа!",
+        tryAgainHint: "Обиди се повторно — за малку!",
+        winHint: "Честитки! Победи!",
+        modalTitle: "🎉 Честитки!",
+        modalText: "Освои 150% на депозит и 250 бесплатни вртења!",
+        claim: "Преземи награда"
+    },
+
+    lb: {
+        title: "DRÉI D'RAD",
+        sub: "Probéiert äert Gléck a kritt Bonusser: 150% op den Depot + 250 gratis Dréiungen!",
+        spin: "Dréinen",
+        hintStart: "Probéiert äert Gléck!",
+        tryAgainHint: "Probéiert nach eng Kéier — bal gelongen!",
+        winHint: "Gratulatioun! Dir hutt gewonnen!",
+        modalTitle: "🎉 Gratulatioun!",
+        modalText: "Dir hutt 150% op den Depot an 250 gratis Dréiungen gewonnen!",
+        claim: "Gewënn ofhuelen"
+    },
+
+    br: {
+        title: "TROELL AN ROUDEL",
+        sub: "Amprouit ho chañs ha tapit bonusoù: 150% ouzh an dikraj + 250 troioù digoust!",
+        spin: "Troell",
+        hintStart: "Amprouit ho chañs!",
+        tryAgainHint: "Klaskit en-dro — e-unan emaoc'h!",
+        winHint: "Gourc'hemennoù! Bez' hoc'h eus gounezet!",
+        modalTitle: "🎉 Gourc'hemennoù!",
+        modalText: "Hoc'h eus gounezet 150% ouzh an dikraj ha 250 troioù digoust!",
+        claim: "Tapit ar provez"
+    },
+
+    co: {
+        title: "GIRA A ROTA",
+        sub: "Pruvate a furtuna è pigliate i bonus: 150% nant'à u depositu + 250 spins gratuiti!",
+        spin: "Girà",
+        hintStart: "Pruvate a furtuna!",
+        tryAgainHint: "Pruvate torna — quasi ci site!",
+        winHint: "Cungratulazioni! Avete vintu!",
+        modalTitle: "🎉 Cungратulazioni!",
+        modalText: "Avete vintu 150% nant'à u depositu è 250 spins gratuiti!",
+        claim: "Ritirá u premiu"
+    },
+
+    ce: {
+        title: "ВУОГӀА ТУМ",
+        sub: "ТӀехь бехк хьуна а, 150% депозитан + 250 тӀехь йуцуш долла хиларш!",
+        spin: "Тум",
+        hintStart: "ТӀехь бехк хьуна!",
+        tryAgainHint: "Кхин тӀе — хила хӀинца!",
+        winHint: "Мубарак ба! Хьо кхета!",
+        modalTitle: "🎉 Мубарак ба!",
+        modalText: "150% депозитан хиларш ю, 250 йуцуш хиларш!",
+        claim: "Юкъонах ла"
+    },
+
+    rm: {
+        title: "STUSCHA LA ROTA",
+        sub: "Emprova tia schanza ed retschaiva bonus: 150% sin il deposit + 250 spins gratuits!",
+        spin: "Stuschar",
+        hintStart: "Emprova tia schanza!",
+        tryAgainHint: "Emprova anc ina giada — quasi reussì!",
+        winHint: "Gratulaziun! Ti has gudagnà!",
+        modalTitle: "🎉 Gratulaziun!",
+        modalText: "Ti has gudagnà 150% sin il deposit e 250 spins gratuits!",
+        claim: "Prender il premi"
+    },
+
+    is: {
+        title: "SNÚÐU HJÓLIÐ",
+        sub: "Prófaðu heppnina og fáðu bónusa: 150% innborgunarbónus + 250 fríspinn!",
+        spin: "Snúa",
+        hintStart: "Prófaðu heppnina!",
+        tryAgainHint: "Reyndu aftur — næstum því!",
+        winHint: "Til hamingju! Þú vannst!",
+        modalTitle: "🎉 Til hamingju!",
+        modalText: "Þú vannst 150% bónus og 250 fríspinn!",
+        claim: "Sækja vinning"
+    },
+
+    ga: {
+        title: "CAS AN ROUE",
+        sub: "Bain triail as an ádh agus faigh bónais: 150% ar an éarlais + 250 spins saor!",
+        spin: "Cas",
+        hintStart: "Bain triail as an ádh!",
+        tryAgainHint: "Déan iarracht arís — beagnach ann!",
+        winHint: "Comhghairdeas! Bhuaigh tú!",
+        modalTitle: "🎉 Comhghairdeas!",
+        modalText: "Bhуаigh tú 150% ar an éarlais agus 250 spins saor!",
+        claim: "Faigh an duais"
+    },  
+
+    eu: {
+        title: "BIRATU GURPILA",
+        sub: "Probatu zortea eta eskuratu bonusak: gordailuaren %150 + 250 bira doan!",
+        spin: "Biratu",
+        hintStart: "Probatu zortea!",
+        tryAgainHint: "Saiatu berriro — ia-ia lortua!",
+        winHint: "Zorionak! Irabazi duzu!",
+        modalTitle: "🎉 Zorionak!",
+        modalText: "%150 bonus eta 250 bira doan irabazi dituzu!",
+        claim: "Eskuratu saria"
+    },
+
+    fy: {
+        title: "DRAAI IT TSJIL",
+        sub: "Probearje dyn gelok en pak bonussen: 150% op de storting + 250 fergese spins!",
+        spin: "Draaie",
+        hintStart: "Probearje dyn gelok!",
+        tryAgainHint: "Probearje opnij — hast klear!",
+        winHint: "Lokwinske! Do hast wûn!",
+        modalTitle: "🎉 Lokwinske!",
+        modalText: "Do hast 150% bonus en 250 fergese spins wûn!",
+        claim: "Pak dyn priis"
+    },
+
+    gl: {
+        title: "XIRA A RODA",
+        sub: "Proba sorte e consegue bonos: 150% ao depósito + 250 tiradas gratis!",
+        spin: "Xirar",
+        hintStart: "Proba sorte!",
+        tryAgainHint: "Téntao de novo — case o tes!",
+        winHint: "Parabéns! Gañaches!",
+        modalTitle: "🎉 Parabéns!",
+        modalText: "Gañaches 150% ao depósito e 250 tiradas gratis!",
+        claim: "Recolle o premio"
+    },
+
+    be: {
+        title: "КРУЦІ КОЛА",
+        sub: "Паспрабуйце поспех і атрымайце бонусы: 150% да дэпазіту + 250 бясплатных спінаў!",
+        spin: "Круціць",
+        hintStart: "Паспрабуйце поспех!",
+        tryAgainHint: "Паспрабуйце зноў — амаль атрымалася!",
+        winHint: "Віншуем! Вы выйгралі!",
+        modalTitle: "🎉 Віншуем!",
+        modalText: "Вы выйгралі 150% да дэпазіту і 250 бясплатных спінаў!",
+        claim: "Забраць выйгрыш"
+    },
+
+    hy: {
+        title: "ՊՏՏԵՑՐՈՒ ԵՐԿԱՆ",
+        sub: "Փորձեք ձեր բախտը և ստացեք բոնուսներ՝ 150% ավանդին + 250 անվճար պտույտներ!",
+        spin: "Պտտեցնել",
+        hintStart: "Փորձիր բախտդ!",
+        tryAgainHint: "Կրկին փորձիր — քիչ մնաց!",
+        winHint: "Շնորհավորում ենք! Դուք հաղթեցիք!",
+        modalTitle: "🎉 Շնորհավորում ենք!",
+        modalText: "Դուք շահեցիք ավանդի 150% և 250 անվճար պտույտներ!",
+        claim: "Ստանալ շահումը"
+    },
+
+    hi: {
+        title: "पहिया घुमाएँ",
+        sub: "अपनी किस्मत आज़माएँ और बोनस पाएँ: जमा पर 150% + 250 फ्री स्पिन!",
+        spin: "घुमाएँ",
+        hintStart: "क़िस्मत आज़माएँ!",
+        tryAgainHint: "फिर से कोशिश करें — लगभग हो गया था!",
+        winHint: "बधाई हो! आप जीत गए!",
+        modalTitle: "🎉 बधाई हो!",
+        modalText: "आपने 150% जमा बोनस और 250 फ्री स्पिन जीते हैं!",
+        claim: "इनाम प्राप्त करें"
+    },
+
+    ha: {
+        title: "JUYA DABARU",
+        sub: "Gwada sa'a ku kuma sami kari: 150% a ajiyar ku + juyawa 250 kyauta!",
+        spin: "Juya",
+        hintStart: "Gwada sa’arka!",
+        tryAgainHint: "Sake gwadawa — kusan ka yi nasara!",
+        winHint: "Rukutacciya! Ka ci!",
+        modalTitle: "🎉 Rukutacciya!",
+        modalText: "Ka ci 150% da 250 kyauta spins!",
+        claim: "Karɓi ladan"
+    },
+
+    zu: {
+        title: "JIKISA IVILI",
+        sub: "Zama inhlanhla yakho uthole amabhonasi: 150% kudiphozithi + 250 ama-spins wamahhala!",
+        spin: "Jikisa",
+        hintStart: "Zama inhlanhla!",
+        tryAgainHint: "Zama futhi — cishe waphumelela!",
+        winHint: "Siyakwemukela! Uwine!",
+        modalTitle: "🎉 Siyakwemukela!",
+        modalText: "Uwine u-150% nodwa 250 ama-spins!",
+        claim: "Thatha umklomelo"
+    },
+
+    yo: {
+        title: "YI KẸ̀KẸ́",
+        sub: "Gbiyanju orire ki o gba awọn ajeseku: 150% lori idogo + 250 free spins!",
+        spin: "Yi",
+        hintStart: "Gbiyanju orire!",
+        tryAgainHint: "Tun ṣe idanwo — o fẹrẹ ṣẹ!",
+        winHint: "Ẹ kú orire! O bori!",
+        modalTitle: "🎉 Ẹ kú orire!",
+        modalText: "O bori 150% ati 250 free spins!",
+        claim: "Gba ere naa"
+    },
+
+    so: {
+        title: "ROGO GAASKA",
+        sub: "Tijaabi nasiibkaaga oo hel gunno: 150% deebaajiga + 250 spins bilaash ah!",
+        spin: "Rogo",
+        hintStart: "Tijaabi nasiibka!",
+        tryAgainHint: "Isku day mar kale — ku dhowaad!",
+        winHint: "Hambalyo! Waad guuleysatay!",
+        modalTitle: "🎉 Hambalyo!",
+        modalText: "Waxaad heshay 150% iyo 250 spins!",
+        claim: "Qaado abaalmarinta"
+    },
+
+    sw: {
+        title: "GEUZA GURUDUMU",
+        sub: "Jaribu bahati yako upate bonasi: 150% kwenye amana + mizunguko 250 ya bure!",
+        spin: "Geuza",
+        hintStart: "Jaribu bahati!",
+        tryAgainHint: "Jaribu tena — karibu ufanikiwe!",
+        winHint: "Hongera! Umeshinda!",
+        modalTitle: "🎉 Hongera!",
+        modalText: "Umeshinda 150% na mizunguko 250!",
+        claim: "Dai zawadi"
+    },
+
+    mg: {
+        title: "ATSOFOHY NY ROHY",
+        sub: "Andрамо vintana ary alaivo ny tombontsoa: 150% amin'ny petra-bola + 250 spins maimaim-poana!",
+        spin: "Atsofohy",
+        hintStart: "Andрамо vintana!",
+        tryAgainHint: "Avereno — saika tratra!",
+        winHint: "Arabaina! Nandresy ianao!",
+        modalTitle: "🎉 Arabaina!",
+        modalText: "Nahazo 150% sy 250 spins ianao!",
+        claim: "Alao ny loka"
+    },
+
+    am: {
+        title: "ተሽከርካሪውን አዙር",
+        sub: "ዕድልህን አሞክር እና ቦነስ ተቀበል: 150% ተቀባይነት + 250 ነጻ spins!",
+        spin: "አዙር",
+        hintStart: "ዕድልህን ሞክር!",
+        tryAgainHint: "እንደገና ሞክር — ቀርቶብክ!",
+        winHint: "እንኳን ደስ አለህ! አሸንፈሀ!",
+        modalTitle: "🎉 እንኳን ደስ አለ!",
+        modalText: "150% እና 250 spins አሸንፈሃ!",
+        claim: "ዋጋውን ውሰድ"
+    },
+
+    he: {
+        title: "סובב את הגלגל",
+        sub: "נסו את מזלכם וקבלו בונוסים: 150% הפקדה + 250 ספינים חינם!",
+        spin: "סובב",
+        hintStart: "נסו את מזלכם!",
+        tryAgainHint: "נסו שוב — כמעט הצלחתם!",
+        winHint: "מזל טוב! זכיתם!",
+        modalTitle: "🎉 מזל טוב!",
+        modalText: "זכיתם ב־150% ו־250 ספינים!",
+        claim: "קבלו פרס"
+    },
+
+    fa: {
+        title: "چرخ را بچرخان",
+        sub: "شانس خود را امتحان کنید و پاداش بگیرید: 150٪ واریز + 250 اسپین رایگان!",
+        spin: "چرخاندن",
+        hintStart: "شانس خود را امتحان کنید!",
+        tryAgainHint: "دوباره امتحان کنید — نزدیک بود!",
+        winHint: "تبریک! برنده شدید!",
+        modalTitle: "🎉 تبریک!",
+        modalText: "150٪ و 250 اسپین بردید!",
+        claim: "دریافت جایزه"
+    },
+
+    ms: {
+        title: "PUTAR RODA",
+        sub: "Cuba nasib anda dan dapatkan bonus: 150% deposit + 250 putaran percuma!",
+        spin: "Putar",
+        hintStart: "Cuba nasib!",
+        tryAgainHint: "Cuba lagi — hampir berjaya!",
+        winHint: "Tahniah! Anda menang!",
+        modalTitle: "🎉 Tahniah!",
+        modalText: "Anda menang 150% dan 250 putaran!",
+        claim: "Tuntut hadiah"
+    },
+
+    ne: {
+        title: "चक्क घुमाउनुहोस्",
+        sub: "भाग्य परीक्षण गर्नुहोस्: 150% जम्मा बोनस + 250 निःशुल्क स्पिन!",
+        spin: "घुमाउनुहोस्",
+        hintStart: "भाग्य प्रयास गर्नुहोस्!",
+        tryAgainHint: "फेरि प्रयास गर्नुहोस् — झण्डै भयो!",
+        winHint: "बधाई छ! तपाईं जित्नुभयो!",
+        modalTitle: "🎉 बधाई!",
+        modalText: "तपाईंले 150% र 250 स्पिन जित्नुभयो!",
+        claim: "पुरस्कार लिनुहोस्"
+    },
+
+    bn: {
+        title: "চাকা ঘোরান",
+        sub: "আপনার ভাগ্য পরীক্ষা করুন: 150% জমা বোনাস + 250 ফ্রি স্পিন!",
+        spin: "ঘোরান",
+        hintStart: "ভাগ্য পরীক্ষা করুন!",
+        tryAgainHint: "আবার চেষ্টা করুন — প্রায় হয়ে গিয়েছিল!",
+        winHint: "অভিনন্দন! আপনি জিতেছেন!",
+        modalTitle: "🎉 অভিনন্দন!",
+        modalText: "আপনি 150% এবং 250 ফ্রি স্পিন জিতেছেন!",
+        claim: "পুরস্কার নিন"
+    },
+
+    ur: {
+        title: "پہیہ گھمائیں",
+        sub: "قسمت آزمائیں اور بونس حاصل کریں: 150% جمع + 250 مفت اسپن!",
+        spin: "گھمائیں",
+        hintStart: "قسمت آزمائیں!",
+        tryAgainHint: "دوبارہ کوشش کریں — قریب تھا!",
+        winHint: "مبارک ہو! آپ جیت گئے!",
+        modalTitle: "🎉 مبارک ہو!",
+        modalText: "آپ نے 150% اور 250 اسپن جیتے!",
+        claim: "انعام وصول کریں"
+    },
+
+    pa: {
+        title: "ਪਹੀਆ ਘੁੰਮਾਓ",
+        sub: "ਆਪਣੀ ਕਿਸਮਤ ਅਜ਼ਮਾਓ: 150% ਜਮ੍ਹਾਂ + 250 ਮੁਫ਼ਤ ਸਪਿਨ!",
+        spin: "ਘੁੰਮਾਓ",
+        hintStart: "ਕਿਸਮਤ ਅਜ਼ਮਾਓ!",
+        tryAgainHint: "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ — ਲੱਗਭਗ ਹੋ ਗਿਆ ਸੀ!",
+        winHint: "ਵਧਾਈਆਂ! ਤੁਸੀਂ ਜਿੱਤ ਲਿਆ!",
+        modalTitle: "🎉 ਵਧਾਈਆਂ!",
+        modalText: "ਤੁਸੀਂ 150% ਅਤੇ 250 ਸਪਿਨ ਜਿੱਤੇ!",
+        claim: "ਇਨਾਮ ਲਵੋ"
+    },
+
+    or: {
+        title: "ଚକ୍ର ଘୁଞ୍ଚାନ୍ତୁ",
+        sub: "ଭାଗ୍ୟ ପରୀକ୍ଷା କରନ୍ତୁ: 150% ଜମା + 250 ମୁକ୍ତ ସ୍ପିନ!",
+        spin: "ଘୁଞ୍ଚାନ୍ତୁ",
+        hintStart: "ଭାଗ୍ୟ ପରୀକ୍ଷା କରନ୍ତୁ!",
+        tryAgainHint: "ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ — ପ୍ରାୟ ସଫଳ!",
+        winHint: "ଅଭିନନ୍ଦନ! ଆପଣ ଜିତିଛନ୍ତି!",
+        modalTitle: "🎉 ଅଭିନନ୍ଦନ!",
+        modalText: "ଆପଣ 150% ଏବଂ 250 ସ୍ପିନ ଜିତିଛନ୍ତି!",
+        claim: "ପୁରସ୍କାର ନିଅନ୍ତୁ"
+    },
+
+    ta: {
+        title: "சக்கரத்தைச் சுழற்றவும்",
+        sub: "உங்கள் அதிர்ஷ்டத்தை முயற்சிக்கவும்: 150% வைப்பு + 250 இலவச ஸ்பின்!",
+        spin: "சுழற்றவும்",
+        hintStart: "அதிர்ஷ்டம் முயலவும்!",
+        tryAgainHint: "மீண்டும் முயற்சி செய் — கிட்டத்தட்ட இருந்தது!",
+        winHint: "வாழ்த்துகள்! நீ வென்றாய்!",
+        modalTitle: "🎉 வாழ்த்துகள்!",
+        modalText: "150% மற்றும் 250 ஸ்பின் வென்றுள்ளீர்!",
+        claim: "பரிசை பெறவும்"
+    },
+
+    te: {
+        title: "చక్రాన్ని తిప్పండి",
+        sub: "అదృష్టాన్ని ప్రయత్నించండి: 150% డిపాజిట్ + 250 ఉచిత స్పిన్లు!",
+        spin: "తిప్పండి",
+        hintStart: "అదృష్టం పరీక్షించండి!",
+        tryAgainHint: "మళ్లీ ప్రయత్నించండి — దాదాపు విజయము!",
+        winHint: "అభినందనలు! మీరు గెలిచారు!",
+        modalTitle: "🎉 అభినందనలు!",
+        modalText: "మీరు 150% మరియు 250 స్పిన్లు గెలిచారు!",
+        claim: "బహుమతి పొందండి"
+    },
+
+    kn: {
+        title: "ಚಕ್ರವನ್ನು ತಿರುಗಿಸಿ",
+        sub: "ನಿಮ್ಮ ಅದೃಷ್ಟವನ್ನು ಪರೀಕ್ಷಿಸಿ: 150% ಠೇವಣಿ + 250 ಉಚಿತ ಸ್ಪಿನ್!",
+        spin: "ತಿರುಗಿಸಿ",
+        hintStart: "ಅದೃಷ್ಟ ಪ್ರಯತ್ನಿಸಿ!",
+        tryAgainHint: "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ — ಬಹಳ ಹತ್ತಿರ!",
+        winHint: "ಅಭಿನಂದನೆಗಳು! ನೀವು ಗೆದ್ದಿದ್ದೀರಿ!",
+        modalTitle: "🎉 ಅಭಿನಂದನೆಗಳು!",
+        modalText: "150% ಮತ್ತು 250 ಸ್ಪಿನ್ ಗೆದ್ದಿದ್ದೀರಿ!",
+        claim: "ಬಹುಮಾನ ಪಡೆಯಿರಿ"
+    },
+
+    si: {
+        title: "චක්‍රය හැරවන්න",
+        sub: "අදෘෂ්ටය පරික්ෂා කරන්න: තැන්පතු 150% + 250 නිදහස් ස්පින්!",
+        spin: "හැරවන්න",
+        hintStart: "අදෘෂ්ටය පරික්ෂා කරන්න!",
+        tryAgainHint: "නැවත උත්සාහ කරන්න — ලගයි!",
+        winHint: "සුභ පැතුම්! ඔබ ජය ගත්තෙයි!",
+        modalTitle: "🎉 සුභ පැතුම්!",
+        modalText: "ඔබ 150% සහ 250 ස්පින් ලබාගත්තා!",
+        claim: "සම්මානය ලබාගන්න"
+    },
+
+    my: {
+        title: "ဘီးကိုလှញ့ပါ",
+        sub: "ကံစမ်းကြည့်ပြီး ဘောနပ်များရယူပါ: 150% အပ်နှံ + 250 အခမဲ့ spin!",
+        spin: "လှည့္ပါ",
+        hintStart: "ကံစမ်းကြည့်ပါ!",
+        tryAgainHint: "နောက်တစ်ကြိမ် ကြိုးစားပါ — မကြာခင်!",
+        winHint: "ဂုဏ်ယူပါတယ်! အောင်မြင်!",
+        modalTitle: "🎉 ဂုဏ်ယူပါတယ်!",
+        modalText: "150% နှင့် 250 spins ရရှိ!",
+        claim: "ဆုယူပါ"
+    },
+
+    km: {
+        title: "បង្វិលកង់",
+        sub: "សាកល្បងសំណាង: 150% ប្រាក់បញ្ញើ + 250 free spins!",
+        spin: "បង្វិល",
+        hintStart: "សាកល្បងសំណាង!",
+        tryAgainHint: "ព្យាយាមម្ដងទៀត — ជិតបានហើយ!",
+        winHint: "អបអរ! អ្នកឈ្នះ!",
+        modalTitle: "🎉 អបអរ!",
+        modalText: "អ្នកឈ្នះ 150% និង 250 free spins!",
+        claim: "ទទួលរង្វាន់"
+    },
+
+    ky: {
+        title: "ДӨҢГӨЛӨКТҮ АЙЛАНТ",
+        sub: "Байге утуп көрүңүз: 150% депозит + 250 акысыз спин!",
+        spin: "Айлант",
+        hintStart: "Бактыңызды сынап көрүңүз!",
+        tryAgainHint: "Дагы аракет кылыңыз — дээрлик болду!",
+        winHint: "Куттуктайбыз! Сиз уттуңуз!",
+        modalTitle: "🎉 Куттуктайбыз!",
+        modalText: "150% жана 250 спин уттуңуз!",
+        claim: "Сыйлык алыңыз"
+    },
+
+    ps: {
+        title: "څرخ وګرځوه",
+        sub: "خپل بخت وازمېی: 150% زېرمه + 250 وړیا سپن!",
+        spin: "وګرځوه",
+        hintStart: "بخت وازموئ!",
+        tryAgainHint: "بیا هڅه وکړئ — نژدې وئ!",
+        winHint: "مبارک دې وي! وګټلې!",
+        modalTitle: "🎉 مبارک!",
+        modalText: "150% او 250 سپن وګټلې!",
+        claim: "جایزه واخلئ"
+    },
+
+    bo: {
+        title: "འཁོར་ལོ་བསྒྱིར།",
+        sub: "ལྷག་པར་སྐྱོན་ལེན། 150% དང་ 250 སྒྱིར་རྟ།",
+        spin: "བསྒྱིར།",
+        hintStart: "ལེན་སྐྱོན་མི་བརྟན།",
+        tryAgainHint: "བསྐྱར་ལོག་འབད།",
+        winHint: "བཀྲ་ཤིས་བདེ་ལེགས།",
+        modalTitle: "🎉 བཀྲ་ཤིས།",
+        modalText: "150% དང་ 250 སྒྱིར་རྟ།",
+        claim: "ལེན་གྱི་སྒོ།"
+    },
+
+    hr: {
+        title: "ZAVRTI KOTAČ",
+        sub: "Iskušajte sreću i osvojite bonuse: 150% na depozit + 250 besplatnih vrtnji!",
+        spin: "Zavrti",
+        hintStart: "Iskušaj sreću!",
+        tryAgainHint: "Pokušaj opet — skoro je uspjelo!",
+        winHint: "Čestitamo! Pobijedili ste!",
+        modalTitle: "🎉 Čestitamo!",
+        modalText: "Osvojili ste 150% na depozit i 250 besplatnih vrtnji!",
+        claim: "Preuzmi nagradu"
+    },
+
+    th: {
+        title: "หมุนวงล้อ",
+        sub: "ลองเสี่ยงโชคและรับโบนัส: 150% สำหรับฝากเงิน + 250 ฟรีสปิน!",
+        spin: "หมุน",
+        hintStart: "ลองเสี่ยงโชค!",
+        tryAgainHint: "ลองใหม่ — เกือบสำเร็จ!",
+        winHint: "ยินดีด้วย! คุณชนะแล้ว!",
+        modalTitle: "🎉 ยินดีด้วย!",
+        modalText: "คุณได้รับ 150% และ 250 ฟรีสปิน!",
+        claim: "รับรางวัล"
+    },
+
+    vi: {
+        title: "XOAY VÒNG QUAY",
+        sub: "Thử vận may và nhận thưởng: 150% tiền gửi + 250 vòng quay miễn phí!",
+        spin: "Xoay",
+        hintStart: "Thử vận may!",
+        tryAgainHint: "Thử lại — suýt trúng!",
+        winHint: "Chúc mừng! Bạn đã thắng!",
+        modalTitle: "🎉 Chúc mừng!",
+        modalText: "Bạn thắng 150% và 250 vòng quay miễn phí!",
+        claim: "Nhận thưởng"
+    },
+
+    id: {
+        title: "PUTAR RODA",
+        sub: "Coba keberuntungan Anda: bonus 150% deposit + 250 putaran gratis!",
+        spin: "Putar",
+        hintStart: "Coba keberuntungan!",
+        tryAgainHint: "Coba lagi — hampir berhasil!",
+        winHint: "Selamat! Anda menang!",
+        modalTitle: "🎉 Selamat!",
+        modalText: "Anda memenangkan 150% dan 250 putaran gratis!",
+        claim: "Klaim hadiah"
+    },
+
+    af: {
+        title: "DRAAI DIE WIEL",
+        sub: "Probeer jou geluk en kry bonusse: 150% deposito + 250 gratis spins!",
+        spin: "Draai",
+        hintStart: "Probeer jou geluk!",
+        tryAgainHint: "Probeer weer — amper daar!",
+        winHint: "Geluk! Jy het gewen!",
+        modalTitle: "🎉 Geluk!",
+        modalText: "Jy het 150% en 250 gratis spins gewen!",
+        claim: "Neem jou prys"
+    },
+
+    mn: {
+        title: "ДУГУЙГ ЭРГҮҮЛ",
+        sub: "Аз туршаад урамшуулал аваарай: 150% орлого + 250 үнэгүй эргэлт!",
+        spin: "Эргүүлэх",
+        hintStart: "Аз туршаарай!",
+        tryAgainHint: "Дахин оролдоорой — бараг боллоо!",
+        winHint: "Баяр хүргэе! Та хожлоо!",
+        modalTitle: "🎉 Баяр хүргэе!",
+        modalText: "Та 150% болон 250 үнэгүй эргэлт хожлоо!",
+        claim: "Шагнал авах"
+    },
+
+    mr: {
+        title: "चाक फिरवा",
+        sub: "नशीब आजमवा: 150% जमा बोनस + 250 फ्री स्पिन!",
+        spin: "फिरवा",
+        hintStart: "नशीब आजमवा!",
+        tryAgainHint: "पुन्हा प्रयत्न करा — जवळपास झाले!",
+        winHint: "अभिनंदन! तुम्ही जिंकलात!",
+        modalTitle: "🎉 अभिनंदन!",
+        modalText: "तुम्ही 150% आणि 250 स्पिन जिंकले!",
+        claim: "बक्षीस घ्या"
+    },
+
+    kk: {
+        title: "ДӨҢГЕЛЕКТІ АЙНАЛДЫР",
+        sub: "Бақытыңды сынап көр: 150% депозит + 250 тегін айналдыру!",
+        spin: "Айналдыр",
+        hintStart: "Бақытыңды сына!",
+        tryAgainHint: "Қайта көр — жақын қалдың!",
+        winHint: "Құттықтаймыз! Сен жеңдің!",
+        modalTitle: "🎉 Құттықтаймыз!",
+        modalText: "150% және 250 тегін айналдыру жеңдің!",
+        claim: "Жүлдені алу"
+    },
+
+    ug: {
+        title: "چاقنى ئايلاندۇرۇڭ",
+        sub: "نەسىپىڭىزنى سىناڭ: %150 دەپوزىت + 250 ھەقسىز ئايلاندۇرۇش!",
+        spin: "ئايلاندۇرۇش",
+        hintStart: "نەسىپ سىنا!",
+        tryAgainHint: "قايتا سىنا — ئەزگىنە قالدى!",
+        winHint: "مۇبارەك بولسۇن! ئويناپ چىقتىڭىز!",
+        modalTitle: "🎉 مۇبارەك!",
+        modalText: "سىز %150 ۋە 250 ھەقسىз ئايلاندۇرۇشقا ئېرىشتىingiz!",
+        claim: "مۇكاپات ئېلىڭ"
+    },
+
+    tl: {
+        title: "PAIKUTIN ANG GULONG",
+        sub: "Subukan ang swerte: 150% deposito + 250 libreng spins!",
+        spin: "Paikutin",
+        hintStart: "Subukan ang swerte!",
+        tryAgainHint: "Subukan muli — muntik na!",
+        winHint: "Binabati! Panalo ka!",
+        modalTitle: "🎉 Binabati!",
+        modalText: "Nanalo ka ng 150% at 250 free spins!",
+        claim: "Kunín ang premyo"
+    },
+
+    tk: {
+        title: "TEKERİ DÖWERT",
+        sub: "Bagtyňy synap gör: 150% depozit + 250 mugt öwrüliş!",
+        spin: "Döwert",
+        hintStart: "Bagtyňy syna!",
+        tryAgainHint: "Täzeden synanyş — diýen ýaly boldy!",
+        winHint: "Gutlaýarys! Sen ýeňдиň!",
+        modalTitle: "🎉 Gutlaýarys!",
+        modalText: "150% we 250 mugt öwrüliş ýeňديң!",
+        claim: "Baýrak al"
+    },
+
+    ig: {
+        title: "GBANYỤE WHEE",
+        sub: "Nwale chi gị: 150% nkwụnye + 250 spins n’efu!",
+        spin: "Gbanyụọ",
+        hintStart: "Nwale chi gị!",
+        tryAgainHint: "Gbalịa ọzọ — fọrọ nke nta!",
+        winHint: "Ekele diri gị! Ị meriri!",
+        modalTitle: "🎉 Ekele!",
+        modalText: "I meriri 150% na 250 spins!",
+        claim: "Nweta onyinye"
+    },
+
+    ht: {
+        title: "VIRE WOULET LA",
+        sub: "Eprouve chans ou: 150% depo + 250 tònen gratis!",
+        spin: "Vire",
+        hintStart: "Eprouve chans!",
+        tryAgainHint: "Eseye ankò — prèske!",
+        winHint: "Felisitasyon! Ou genyen!",
+        modalTitle: "🎉 Felisitasyon!",
+        modalText: "Ou genyen 150% ak 250 tònen!",
+        claim: "Reklame pri a"
+    },
+
+    dv: {
+        title: "ވަޅު ގަނޑު ބަލައްކާ",
+        sub: "ކުޅިވަރު އިސްކަން 150% އަށް 250 ފްރީ ސްޕިން!",
+        spin: "ބަލައްކާ",
+        hintStart: "ކުޅިވަރު އިސްކަން!",
+        tryAgainHint: "އަލު ސައްދޫ — އަލު އަޅު!",
+        winHint: "ސަބްޕަލަށް! ވިއްކަން!",
+        modalTitle: "🎉 ސަބްޕަލަށް!",
+        modalText: "150% އަށް 250 ސްޕިން ވިއްކަން!",
+        claim: "ފެންވައި"
+    },
+
+    as: {
+        title: "চক্ৰ ঘুৰাওক",
+        sub: "ভাগ্য পৰীক্ষা কৰক: 150% জমা + 250 বিনামূলীয়া স্পিন!",
+        spin: "ঘুৰাওক",
+        hintStart: "ভাগ্য পৰীক্ষা কৰক!",
+        tryAgainHint: "পুনঃ চেষ্টা কৰক — প্ৰায় হয় গৈছিল!",
+        winHint: "অভিনন্দন! আপুনি জিকিছেনে!",
+        modalTitle: "🎉 अभिनंदन!",
+        modalText: "150% আৰু 250 স্পিন জিকিছেনে!",
+        claim: "পুৰস্কাৰ লওক"
+    },
     ar:{title:'إدارة العجلة',
         sub:'جرّب حظك: %150 + 250 لفة مجانية!',
         spin:'لفّ',hintStart:'جرّب حظك!',tryAgainHint:'حاول مرة أخرى!',
         winHint:'مبروك!',modalTitle:'🎉 مبروك!',
-        modalText:'ربحت %150 و 250 لفة!',claim:'استلام الجائزة'}
+        modalText:'ربحت %150 و 250 لفة!',claim:'استلام الجائزة'},
+
+    ko: {
+        title: "룰렛을 돌리기",
+        sub: "행운을 시험하고 보너스를 받으세요: 입금 150% + 무료 스핀 250회!",
+        spin: "돌리기",
+        hintStart: "행운을 시험해 보세요!",
+        tryAgainHint: "다시 시도하세요 — 거의 성공!",
+        winHint: "축하합니다! 당첨되셨습니다!",
+        modalTitle: "🎉 축하합니다!",
+        modalText: "입금 보너스 150%와 무료 스핀 250회를 받았습니다!",
+        claim: "보상 받기"
+    },
+
+    uz: {
+        title: "G'ILARNI AYLANG",
+        sub: "Omadingizni sinang: 150% depozit + 250 bepul spin!",
+        spin: "Aylantirish",
+        hintStart: "Omad sinang!",
+        tryAgainHint: "Yana urinib ko‘ring — deyarli bo‘ldi!",
+        winHint: "Tabriklaymiz! Yutdingiz!",
+        modalTitle: "🎉 Tabriklaymiz!",
+        modalText: "150% va 250 spin yutdingiz!",
+        claim: "Yutug‘ni oling"
+    }
+
   };
 
 
